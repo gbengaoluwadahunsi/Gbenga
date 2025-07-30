@@ -515,7 +515,15 @@ export default function HomePage() {
                 technologies: ["Next.js", "TypeScript", "OpenAI API", "Node.js", "Postgresql", "AWS", "Express.js", "TailwindCSS"],
                 imageUrl: "/novateScribe.png",
                 githubUrl: "https://github.com/gbengaoluwadahunsi/Novate",
-                liveUrl: "https://novate.vercel.app/"
+                liveUrl: "https://www.novatescribe.com"
+              },
+              {
+                title: "Catalystar Environmental Services",
+                description: "Leading environmental consulting firm providing comprehensive solutions for sustainable development and environmental protection. Features environmental impact assessment, compliance auditing, and laboratory testing services.",
+                technologies: ["Next.js", "React", "TailwindCSS", "TypeScript", "Node.js"],
+                imageUrl: "/catalystar.png",
+                githubUrl: "https://github.com/gbengaoluwadahunsi/Catalystar",
+                liveUrl: "https://catalystar.vercel.app/"
               },
               {
                 title: "ClemaChem Tutor",
@@ -548,14 +556,6 @@ export default function HomePage() {
                 imageUrl: "/astonish.png",
                 githubUrl: "https://github.com/gbengaoluwadahunsi/Astonish-Designs",
                 liveUrl: "https://astonish-designs.com.ng/"
-              },
-              {
-                title: "Blockchain Portfolio Tracker",
-                description: "A cryptocurrency portfolio tracker with real-time price updates, AI-driven market analysis, and automated trading suggestions.",
-                technologies: ["React", "Web3.js", "Node.js", "TensorFlow", "GraphQL"],
-                imageUrl: "/coinsight.png",
-                githubUrl: "https://github.com/gbengaoluwadahunsi/coinSight",
-                liveUrl: "https://gbengaoluwadahunsi.github.io/coinSight/"
               }
             ].map((project, index) => (
               <motion.div
