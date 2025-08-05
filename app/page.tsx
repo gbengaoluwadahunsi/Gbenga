@@ -518,6 +518,14 @@ export default function HomePage() {
                 liveUrl: "https://www.novatescribe.com"
               },
               {
+                title: "Document Merger",
+                description: "A powerful browser-based tool that merges any combination of PDFs, Word documents, and images into organized multi-page files. Features drag & drop reordering, multiple export formats, and smart processing - all client-side for privacy.",
+                technologies: ["React", "Next.js", "TailwindCSS", "TypeScript", "PDF-lib", "File API"],
+                imageUrl: "/docmerger.png",
+                githubUrl: "https://github.com/gbengaoluwadahunsi/document-merger",
+                liveUrl: "https://document-merger-ebon.vercel.app/"
+              },
+              {
                 title: "Catalystar Environmental Services",
                 description: "Leading environmental consulting firm providing comprehensive solutions for sustainable development and environmental protection. Features environmental impact assessment, compliance auditing, and laboratory testing services.",
                 technologies: ["Next.js", "React", "TailwindCSS", "TypeScript", "Node.js"],
@@ -540,14 +548,6 @@ export default function HomePage() {
                 imageUrl: "/krad.png",
                 githubUrl: "https://github.com/gbengaoluwadahunsi/krad-apparel",
                 liveUrl: "https://krad-apparel.vercel.app/"
-              },
-              {
-                title: "Crypto learning Platform",
-                description: "A crypto learning App where users can have 360 degrees training about the crypto sapce",
-                technologies: ["React", "Node.js", "Express", "MongoDB", "TypeScript"],
-                imageUrl: "/crypto.png",
-                githubUrl: "https://github.com/gbengaoluwadahunsi/CryptoLearner",
-                liveUrl: "https://crypto-learner.vercel.app/"
               },
               {
                 title: "Fashion Design Web App",

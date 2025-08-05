@@ -53,7 +53,9 @@ const BlogSection = () => {
 
   const totalPages = Math.ceil(blogPostsData.length / POSTS_PER_PAGE);
   const startIndex = currentPage * POSTS_PER_PAGE;
-  const selectedPosts = blogPostsData.slice(startIndex, startIndex + POSTS_PER_PAGE);
+  // Reverse the order to show latest posts first
+  const reversedPosts = [...blogPostsData].reverse();
+  const selectedPosts = reversedPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 
   const handleNextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
