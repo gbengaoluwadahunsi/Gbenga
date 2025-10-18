@@ -1,0 +1,70 @@
+[
+  {
+    "id": "novate-ai-cto",
+    "title": "CTO, AI & Software Engineer (Founding Engineer)",
+    "company": "Novate AI",
+    "period": "May 2025 - Present",
+    "startDate": "2025-05-01",
+    "description": "Leading the technical vision and development as a founding engineer, focusing on AI and software engineering. Architecting scalable systems for AI-powered healthcare solutions and driving innovation in medical technology.",
+    "isCurrentRole": true,
+    "location": "Remote",
+    "achievements": [
+      "Leading technical architecture for AI healthcare platform",
+      "Building founding engineering team and tech culture",
+      "Implementing machine learning pipelines for medical data processing",
+      "Designing HIPAA-compliant infrastructure"
+    ],
+    "technologies": ["TypeScript", "Next.js", "Python", "LangChain", "PostgreSQL", "AWS", "Docker"]
+  },
+  {
+    "id": "automancers-software-engineer",
+    "title": "Software Engineer",
+    "company": "Automancers PTE Ltd",
+    "period": "Oct 2024 - Jan 2025",
+    "startDate": "2024-10-01",
+    "endDate": "2025-01-31",
+    "description": "Designed and developed a reusable React component library, reducing development time for subsequent projects. Demonstrated strong problem-solving skills by resolving complex UI issues and optimizing database queries.",
+    "location": "Singapore",
+    "achievements": [
+      "Created reusable React component library reducing dev time by 30%",
+      "Resolved complex UI issues, increasing user task completion by 20%",
+      "Optimized database queries reducing backend response times by 30%",
+      "Mentored junior developers on best practices"
+    ],
+    "technologies": ["React", "TypeScript", "Node.js", "MongoDB", "TailwindCSS", "Docker"]
+  },
+  {
+    "id": "pollecode-frontend-developer",
+    "title": "Frontend Developer",
+    "company": "Pollecode",
+    "period": "Sep 2022 - Aug 2024",
+    "startDate": "2022-09-01",
+    "endDate": "2024-08-31",
+    "description": "Crafted single-page applications for brands, improving user engagement and conversion. Conducted performance profiling, optimizations, and integrated third-party APIs.",
+    "location": "Lagos, Nigeria",
+    "achievements": [
+      "Increased user engagement and conversion rate by 3%",
+      "Improved application stability by 2%",
+      "Integrated multiple third-party APIs expanding service offerings",
+      "Led code reviews ensuring quality standards"
+    ],
+    "technologies": ["React", "JavaScript", "Redux", "Tailwind CSS", "REST APIs", "Firebase"]
+  },
+  {
+    "id": "100devs-frontend-developer",
+    "title": "Frontend Developer",
+    "company": "100Devs",
+    "period": "Aug 2021 - May 2022",
+    "startDate": "2021-08-01",
+    "endDate": "2022-05-31",
+    "description": "Collaborated with cross-functional teams to produce streamlined workflows and improvements. Conducted code reviews and refactoring, reducing bugs while creating responsive interfaces.",
+    "location": "Remote",
+    "achievements": [
+      "Reduced bugs and errors by 3% through rigorous code reviews",
+      "Improved user satisfaction by 3%",
+      "Developed responsive user-friendly interfaces",
+      "Collaborated with designers on UX improvements"
+    ],
+    "technologies": ["HTML5", "CSS3", "JavaScript", "React", "Git", "VS Code"]
+  }
+]

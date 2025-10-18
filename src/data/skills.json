@@ -1,0 +1,56 @@
+{
+  "frontend": [
+    { "id": "js", "name": "JavaScript", "category": "frontend", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "ts", "name": "TypeScript", "category": "frontend", "proficiency": "expert", "yearsOfExperience": 3 },
+    { "id": "react", "name": "React", "category": "frontend", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "nextjs", "name": "Next.js", "category": "frontend", "proficiency": "expert", "yearsOfExperience": 3 },
+    { "id": "redux", "name": "Redux", "category": "frontend", "proficiency": "advanced", "yearsOfExperience": 3 },
+    { "id": "tailwind", "name": "Tailwind CSS", "category": "frontend", "proficiency": "expert", "yearsOfExperience": 2 },
+    { "id": "html5", "name": "HTML5", "category": "frontend", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "css3", "name": "CSS3", "category": "frontend", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "sass", "name": "SASS", "category": "frontend", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "mui", "name": "Material UI", "category": "frontend", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "framer", "name": "Framer Motion", "category": "frontend", "proficiency": "advanced", "yearsOfExperience": 1 }
+  ],
+  "backend": [
+    { "id": "nodejs", "name": "Node.js", "category": "backend", "proficiency": "expert", "yearsOfExperience": 3 },
+    { "id": "expressjs", "name": "Express.js", "category": "backend", "proficiency": "expert", "yearsOfExperience": 3 },
+    { "id": "mongodb", "name": "MongoDB", "category": "backend", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "postgresql", "name": "PostgreSQL", "category": "backend", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "firebase", "name": "Firebase", "category": "backend", "proficiency": "intermediate", "yearsOfExperience": 2 },
+    { "id": "rest", "name": "REST API", "category": "backend", "proficiency": "expert", "yearsOfExperience": 3 },
+    { "id": "graphql", "name": "GraphQL", "category": "backend", "proficiency": "intermediate", "yearsOfExperience": 1 },
+    { "id": "aws", "name": "AWS", "category": "backend", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "docker", "name": "Docker", "category": "backend", "proficiency": "advanced", "yearsOfExperience": 1 },
+    { "id": "cicd", "name": "CI/CD", "category": "backend", "proficiency": "intermediate", "yearsOfExperience": 1 }
+  ],
+  "ai": [
+    { "id": "genai", "name": "Generative AI", "category": "ai", "proficiency": "advanced", "yearsOfExperience": 1 },
+    { "id": "agentic", "name": "Agentic AI", "category": "ai", "proficiency": "advanced", "yearsOfExperience": 1 },
+    { "id": "python", "name": "Python", "category": "ai", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "langchain", "name": "LangChain", "category": "ai", "proficiency": "advanced", "yearsOfExperience": 1 },
+    { "id": "llm", "name": "LLM APIs", "category": "ai", "proficiency": "advanced", "yearsOfExperience": 1 },
+    { "id": "vectordb", "name": "Vector DBs", "category": "ai", "proficiency": "intermediate", "yearsOfExperience": 1 }
+  ],
+  "tools": [
+    { "id": "git", "name": "Git", "category": "tools", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "github", "name": "GitHub", "category": "tools", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "vscode", "name": "VS Code", "category": "tools", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "agile", "name": "Agile", "category": "tools", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "scrum", "name": "Scrum", "category": "tools", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "jira", "name": "Jira", "category": "tools", "proficiency": "intermediate", "yearsOfExperience": 2 },
+    { "id": "figma", "name": "Figma", "category": "tools", "proficiency": "intermediate", "yearsOfExperience": 1 },
+    { "id": "jest", "name": "Jest", "category": "tools", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "testing", "name": "Testing Library", "category": "tools", "proficiency": "advanced", "yearsOfExperience": 2 }
+  ],
+  "soft": [
+    { "id": "problem-solving", "name": "Problem Solving", "category": "soft", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "communication", "name": "Communication", "category": "soft", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "teamwork", "name": "Teamwork", "category": "soft", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "leadership", "name": "Leadership", "category": "soft", "proficiency": "advanced", "yearsOfExperience": 2 },
+    { "id": "time-mgmt", "name": "Time Management", "category": "soft", "proficiency": "advanced", "yearsOfExperience": 3 },
+    { "id": "adaptability", "name": "Adaptability", "category": "soft", "proficiency": "expert", "yearsOfExperience": 4 },
+    { "id": "critical-thinking", "name": "Critical Thinking", "category": "soft", "proficiency": "expert", "yearsOfExperience": 3 },
+    { "id": "mentoring", "name": "Mentoring", "category": "soft", "proficiency": "advanced", "yearsOfExperience": 2 }
+  ]
+}

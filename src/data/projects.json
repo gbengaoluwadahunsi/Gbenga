@@ -1,0 +1,102 @@
+[
+  {
+    "id": "novate-scribe",
+    "title": "AI-Powered Notes for Medical Practitioners",
+    "description": "A web application that allows medical practitioners to take notes, generate summaries, and extract key information using AI.",
+    "longDescription": "NovateScribe revolutionizes how medical practitioners manage patient notes and documentation. Features include real-time transcription, AI-powered summarization, secure data storage, and HIPAA-compliant processing. The platform integrates with electronic health records and offers intelligent insights extraction.",
+    "technologies": ["Next.js", "TypeScript", "OpenAI API", "Node.js", "PostgreSQL", "AWS", "Express.js", "TailwindCSS"],
+    "imageUrl": "/novateScribe.png",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/Novate",
+    "liveUrl": "https://www.novatescribe.com",
+    "featured": true,
+    "category": "AI/Healthcare",
+    "year": 2024,
+    "metrics": {
+      "performance": "99.9% uptime",
+      "users": "500+ active practitioners",
+      "impact": "10,000+ patient notes processed"
+    },
+    "challenges": [
+      "Processing sensitive medical data securely",
+      "Ensuring HIPAA compliance",
+      "Handling high-volume real-time processing",
+      "Maintaining accuracy in medical transcriptions"
+    ],
+    "solutions": [
+      "Implemented end-to-end encryption with AWS KMS",
+      "Built audit logging system for HIPAA tracking",
+      "Optimized database queries for throughput",
+      "Integrated multiple AI models for accuracy"
+    ]
+  },
+  {
+    "id": "doc-merger",
+    "title": "Document Merger",
+    "description": "A powerful browser-based tool that merges any combination of PDFs, Word documents, and images into organized multi-page files.",
+    "longDescription": "Document Merger is a privacy-first utility that enables users to seamlessly combine multiple file formats including PDFs, Word documents, images, and spreadsheets. With an intuitive drag-and-drop interface, intelligent reordering, and multiple export formats, it simplifies document management without compromising data security.",
+    "technologies": ["React", "Next.js", "TailwindCSS", "TypeScript", "PDF-lib", "File API"],
+    "imageUrl": "/docmerger.png",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/document-merger",
+    "liveUrl": "https://document-merger-ebon.vercel.app/",
+    "featured": true,
+    "category": "Productivity",
+    "year": 2023,
+    "metrics": {
+      "performance": "Sub-100ms merge operations",
+      "users": "50,000+ monthly users",
+      "impact": "1M+ documents processed"
+    }
+  },
+  {
+    "id": "catalystar",
+    "title": "Catalystar Environmental Services",
+    "description": "Leading environmental consulting firm providing comprehensive solutions for sustainable development and environmental protection.",
+    "longDescription": "Catalystar is a professional environmental services platform offering environmental impact assessment, compliance auditing, laboratory testing services, and sustainability consulting. The platform showcases the firm's expertise and allows clients to book services online.",
+    "technologies": ["Next.js", "React", "TailwindCSS", "TypeScript", "Node.js"],
+    "imageUrl": "/catalystar.png",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/Catalystar",
+    "liveUrl": "https://catalystar.vercel.app/",
+    "featured": true,
+    "category": "Environmental",
+    "year": 2023
+  },
+  {
+    "id": "prepguide",
+    "title": "PrepGuide",
+    "description": "Your comprehensive guide to exam success. Prepare for JAMB, WAEC, and NECO with expertly curated resources and practice materials.",
+    "longDescription": "PrepGuide is a comprehensive exam preparation platform designed to help students excel in Nigerian entrance and certification exams. Features include interactive practice questions, personalized learning paths, performance analytics, and expert-guided content.",
+    "technologies": ["React", "Next.js", "TypeScript", "TailwindCSS", "Node.js"],
+    "imageUrl": "/prepguide.png",
+    "githubUrl": "",
+    "liveUrl": "https://www.prepguide.com.ng",
+    "featured": false,
+    "category": "Education",
+    "year": 2025
+  },
+  {
+    "id": "krad-apparel",
+    "title": "Krad Apparel",
+    "description": "Fashion design and tailoring brand with custom feature that converts prompts to client sketches or simulated garments.",
+    "longDescription": "Krad Apparel revolutionizes fashion design by combining traditional craftsmanship with AI capabilities. Customers can describe their desired garments, and the platform uses Groq's API to generate visual previews, streamlining the design-to-production workflow.",
+    "technologies": ["React", "Next.js", "TailwindCSS", "Groq API"],
+    "imageUrl": "/krad.png",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/krad-apparel",
+    "liveUrl": "https://krad-apparel.vercel.app/",
+    "featured": false,
+    "category": "Fashion/AI",
+    "year": 2023
+  },
+  {
+    "id": "astonish-designs",
+    "title": "Astonish Designs Fashion",
+    "description": "A fashion design web app showcasing different attires and styles to intending and current clients.",
+    "longDescription": "Astonish Designs is a comprehensive fashion portfolio platform that showcases diverse design collections, custom tailoring services, and style consultations. Integrated with AI-powered design suggestions through Hugging Face models.",
+    "technologies": ["React", "TailwindCSS", "Hugging Face API"],
+    "imageUrl": "/astonish.png",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/Astonish-Designs",
+    "liveUrl": "https://astonish-designs.com.ng/",
+    "featured": false,
+    "category": "Fashion",
+    "year": 2023
+  }
+]
