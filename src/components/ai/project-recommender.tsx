@@ -1,20 +1,19 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { motion } from "framer-motion"
 import { Sparkles, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import type { Project } from "@/types"
+import type { Project, Skill } from "@/types"
 
 export function ProjectRecommender() {
   const [userInterests, setUserInterests] = useState<string[]>([])
   const [recommendations, setRecommendations] = useState<Project[]>([])
   const [isAnalyzing, setIsAnalyzing] = useState(false)
-  const [allSkills, setAllSkills] = useState<any[]>([])
+  const [allSkills, setAllSkills] = useState<Skill[]>([])
   const [projects, setProjects] = useState<Project[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  // Load skills and projects on mount - only on client
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -31,11 +30,15 @@ export function ProjectRecommender() {
     loadData()
   }, [])
 
+  const orderedSkills = useMemo(() => {
+    const ai = allSkills.filter((s) => s.category === "ai")
+    const rest = allSkills.filter((s) => s.category !== "ai")
+    return [...ai, ...rest]
+  }, [allSkills])
+
   const handleSkillToggle = (skillName: string) => {
     setUserInterests((prev) =>
-      prev.includes(skillName)
-        ? prev.filter((s) => s !== skillName)
-        : [...prev, skillName]
+      prev.includes(skillName) ? prev.filter((s) => s !== skillName) : [...prev, skillName]
     )
   }
 
@@ -50,8 +53,8 @@ export function ProjectRecommender() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           interests: userInterests,
-          projects: projects
-        })
+          projects: projects,
+        }),
       })
 
       const data = await response.json()
@@ -64,7 +67,11 @@ export function ProjectRecommender() {
   }
 
   if (isLoading) {
-    return <div className="py-16 text-center text-slate-600 dark:text-slate-400">Loading recommendations...</div>
+    return (
+      <div className="py-16 text-center text-slate-400">
+        Loading recommender…
+      </div>
+    )
   }
 
   return (
@@ -73,49 +80,51 @@ export function ProjectRecommender() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="py-16 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-2xl p-8 md:p-12"
+      className="py-16 rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 p-8 shadow-xl md:p-12"
     >
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
+      <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-10 text-center"
         >
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-            <h2 className="text-3xl md:text-4xl font-bold">AI Project Recommender</h2>
-            <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <Sparkles className="h-6 w-6 text-violet-400" />
+            <h2 className="text-3xl font-bold text-white md:text-4xl">AI Project Recommender</h2>
+            <Sparkles className="h-6 w-6 text-violet-400" />
           </div>
-          <p className="text-lg text-slate-600 dark:text-slate-300">
-            Tell me what you're interested in, and I'll recommend relevant projects
+          <p className="text-lg text-slate-300">
+            Pick AI / ML engineering topics you care about — I&apos;ll surface projects that align.
           </p>
         </motion.div>
 
-        {/* Skill Selection */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
           className="mb-8"
         >
-          <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-4">
-            Select technologies you're interested in:
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-violet-300/90">
+            AI &amp; machine learning
+          </p>
+          <p className="mb-4 text-sm font-medium text-slate-200">
+            Select skills &amp; concepts (full-stack tags follow — same matcher):
           </p>
           <div className="flex flex-wrap gap-2">
-            {allSkills.slice(0, 20).map((skill: any) => (
+            {orderedSkills.map((skill) => (
               <motion.button
                 key={skill.id}
+                type="button"
                 onClick={() => handleSkillToggle(skill.name)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className={`rounded-full px-3.5 py-2 text-sm font-medium transition-all ${
                   userInterests.includes(skill.name)
-                    ? "bg-blue-600 text-white dark:bg-blue-500"
-                    : "bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600"
+                    ? "bg-violet-600 text-white shadow-md ring-1 ring-violet-400/60"
+                    : "border border-slate-600 bg-slate-800/90 text-slate-100 hover:border-violet-500/50 hover:bg-slate-800"
                 }`}
               >
                 {skill.name}
@@ -124,35 +133,33 @@ export function ProjectRecommender() {
           </div>
         </motion.div>
 
-        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="flex justify-center mb-12"
+          className="mb-12 flex justify-center"
         >
           <Button
             onClick={handleGetRecommendations}
             disabled={userInterests.length === 0 || isAnalyzing}
             size="lg"
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+            className="bg-gradient-to-r from-violet-600 to-blue-600 text-white hover:from-violet-500 hover:to-blue-500"
           >
             {isAnalyzing ? (
               <>
-                <span className="animate-spin mr-2">⚡</span>
-                Analyzing...
+                <span className="mr-2 inline-block animate-spin">⚡</span>
+                Analyzing…
               </>
             ) : (
               <>
-                Get Recommendations
-                <ArrowRight className="ml-2 w-5 h-5" />
+                Get recommendations
+                <ArrowRight className="ml-2 h-5 w-5" />
               </>
             )}
           </Button>
         </motion.div>
 
-        {/* Recommendations */}
         {recommendations.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -160,29 +167,25 @@ export function ProjectRecommender() {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-4">
-              Recommended projects based on your interests:
+            <p className="mb-4 text-sm font-semibold text-slate-200">
+              Recommended projects:
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {recommendations.map((project, index) => (
                 <motion.div
                   key={project.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-lg transition-all"
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  className="rounded-xl border border-slate-700 bg-slate-900/80 p-6 transition-all hover:border-violet-500/40 hover:shadow-lg"
                 >
-                  <h3 className="font-bold text-lg mb-2 text-slate-900 dark:text-white">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-300 mb-4">
-                    {project.description}
-                  </p>
+                  <h3 className="mb-2 text-lg font-bold text-white">{project.title}</h3>
+                  <p className="mb-4 text-sm text-slate-300">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 3).map((tech) => (
+                    {(project.technologies || []).slice(0, 5).map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded"
+                        className="rounded bg-violet-950/80 px-2 py-1 text-xs text-violet-200 ring-1 ring-violet-800/50"
                       >
                         {tech}
                       </span>

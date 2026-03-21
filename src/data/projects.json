@@ -4,7 +4,7 @@
     "title": "AI-Powered Notes for Medical Practitioners",
     "description": "A web application that allows medical practitioners to take notes, generate summaries, and extract key information using AI.",
     "longDescription": "NovateScribe revolutionizes how medical practitioners manage patient notes and documentation. Features include real-time transcription, AI-powered summarization, secure data storage, and HIPAA-compliant processing. The platform integrates with electronic health records and offers intelligent insights extraction.",
-    "technologies": ["Next.js", "TypeScript", "OpenAI API", "Node.js", "PostgreSQL", "AWS", "Express.js", "TailwindCSS"],
+    "technologies": ["Next.js", "TypeScript", "OpenAI API", "RAG", "LangChain", "Healthcare AI", "Node.js", "PostgreSQL", "AWS", "Express.js", "TailwindCSS", "HIPAA-aware ML"],
     "imageUrl": "/novateScribe.png",
     "githubUrl": "https://github.com/gbengaoluwadahunsi/Novate",
     "liveUrl": "https://www.novatescribe.com",
@@ -43,8 +43,8 @@
     "year": 2023,
     "metrics": {
       "performance": "Sub-100ms merge operations",
-      "users": "50,000+ monthly users",
-      "impact": "1M+ documents processed"
+      "users": "Browser-based (privacy-first)",
+      "impact": "Multi-format merge pipeline"
     }
   },
   {

@@ -4,9 +4,7 @@ import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, ExternalLink, C
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { AIChat } from "../src/components/ai/ai-chat"
 import { ProjectRecommender } from "../src/components/ai/project-recommender"
-import creativePhoto from '../public/two.png'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ProjectCard } from "@/components/project-card"
@@ -16,13 +14,6 @@ import { ContactForm } from "@/components/contact-form"
 import BlogSection from "@/components/blog-section"
 import logo from "@/public/O.png"
 import { ThemeSwitcher } from "@/components/theme-switcher"
-
-// Animation variants for hero
-const heroImageVariant = {
-  initial: { opacity: 0, scale: 0.95 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { duration: 0.8, ease: "easeOut" }
-}
 
 const heroTextVariant = {
   initial: { opacity: 0, y: 30 },
@@ -129,154 +120,169 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative w-full overflow-hidden py-20 md:py-32 lg:py-40">
-          {/* Sophisticated gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-blue-950/20 z-0" />
-          
-          {/* Subtle accent shapes */}
-          <motion.div 
-            className="absolute top-0 right-0 w-96 h-96 bg-blue-100/20 dark:bg-blue-900/10 rounded-full blur-3xl"
-            animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        <section className="relative w-full overflow-hidden py-16 md:py-24 lg:py-32">
+          {/* Background photo: visible; light scrim keeps type readable */}
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+            <Image
+              src="/me.jpg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[center_22%_center] brightness-[0.98] saturate-[0.92] dark:brightness-[0.88] dark:saturate-[0.9]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-50/58 via-white/52 to-violet-100/38 dark:from-slate-950/45 dark:via-slate-900/48 dark:to-violet-950/30" />
+          </div>
+
+          <motion.div
+            className="absolute top-0 right-0 z-[1] w-96 h-96 bg-violet-100/30 dark:bg-violet-900/10 rounded-full blur-3xl"
+            animate={{ x: [0, 40, 0], y: [0, 24, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
-          <motion.div 
-            className="absolute bottom-0 left-0 w-96 h-96 bg-purple-100/20 dark:bg-purple-900/10 rounded-full blur-3xl"
-            animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          <motion.div
+            className="absolute bottom-0 left-0 z-[1] w-80 h-80 bg-emerald-100/20 dark:bg-emerald-900/10 rounded-full blur-3xl"
+            animate={{ x: [0, -36, 0], y: [0, -20, 0] }}
+            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
           />
 
           <div className="container relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              
-              {/* Left Column - Content */}
-              <motion.div 
-                className="flex flex-col justify-center space-y-8"
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+              <motion.div
+                className="lg:col-span-7 flex flex-col justify-center space-y-8"
                 initial="initial"
                 animate="animate"
-                variants={{ animate: { transition: { staggerChildren: 0.15 } } }}
+                variants={{ animate: { transition: { staggerChildren: 0.12 } } }}
               >
-                {/* Badge/Tagline */}
-                
-                {/* Main Headline */}
+                <motion.div variants={heroTextVariant} className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center rounded-full bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm">
+                    Available for work
+                  </span>
+                  <span className="inline-flex items-center rounded-full border border-violet-200 bg-violet-100/90 px-3 py-1.5 text-xs font-semibold text-violet-900 dark:border-violet-800 dark:bg-violet-950/60 dark:text-violet-100">
+                    Antler-backed founder
+                  </span>
+                </motion.div>
+
                 <motion.div variants={heroTextVariant} className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                    <span className="block text-slate-900 dark:text-white">
-                      Building AI-powered
-                    </span>
-                    <span className="block bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-                      products at scale
-                    </span>
+                  <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.12] text-slate-900 dark:text-white dark:[text-shadow:0_2px_28px_rgba(0,0,0,0.55)]">
+                    Biochemist turned{" "}
+                    <span className="font-serif italic text-violet-600 dark:text-violet-400">AI architect</span>
+                    {" — "}building systems that matter.
                   </h1>
+                  <p className="text-lg md:text-xl text-slate-600 dark:text-slate-200 dark:[text-shadow:0_1px_16px_rgba(0,0,0,0.45)] leading-relaxed max-w-2xl font-medium">
+                    I build AI systems at the intersection of healthcare and engineering — from architecture to deployment. Private, decentralized, and edge AI are where I spend my deepest technical focus.
+                  </p>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 dark:[text-shadow:0_1px_12px_rgba(0,0,0,0.4)] leading-relaxed max-w-2xl">
+                    CTO at Novate AI, co-building AI tools for healthcare practitioners. AI Engineer with 4+ years shipping production software and AI products.
+                  </p>
                 </motion.div>
 
-                {/* Subheadline */}
-                <motion.p 
+                <motion.div
                   variants={heroTextVariant}
-                  className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-md"
+                  className="flex flex-col sm:flex-row flex-wrap gap-3 pt-2"
                 >
-                  Full-stack engineer & AI architect. Designing intelligent systems that solve complex problems. Previously building at scale for enterprise teams.
-                </motion.p>
-
-                {/* CTA Buttons */}
-                <motion.div 
-                  variants={heroTextVariant}
-                  className="flex flex-col sm:flex-row gap-4 pt-4"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full sm:w-auto"
+                  <Button
+                    asChild
+                    size="lg"
+                    className="w-full sm:w-auto bg-violet-600 hover:bg-violet-700 dark:bg-violet-500 dark:hover:bg-violet-600 text-white font-semibold shadow-md"
                   >
-                    <Button 
-                      asChild
-                      size="lg"
-                      className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold"
-                    >
-                      <Link href="#contact">
-                        Get in touch
-                        <ArrowRight className="ml-2 h-5 w-5" />
-                      </Link>
-                    </Button>
-                  </motion.div>
-                  
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full sm:w-auto"
+                    <Link href="#projects">
+                      See my work
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="w-full sm:w-auto border-slate-300 bg-white/80 dark:bg-slate-950/40 dark:border-slate-600"
                   >
-                    <Button 
-                      asChild
-                      size="lg"
-                      variant="outline"
-                      className="w-full sm:w-auto border-slate-300 dark:border-slate-600"
-                    >
-                      <Link href="/Gbenga_Oluwadahunsi.pdf" target="_blank">
-                        Download resume
-                        <Download className="ml-2 h-5 w-5" />
-                      </Link>
-                    </Button>
-                  </motion.div>
+                    <Link href="/Gbenga_Oluwadahunsi.pdf" target="_blank" rel="noopener noreferrer">
+                      Download resume
+                      <Download className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="w-full sm:w-auto border-slate-300 bg-white/80 dark:bg-slate-950/40 dark:border-slate-600"
+                  >
+                    <Link href="#contact">
+                      Get in touch
+                    </Link>
+                  </Button>
                 </motion.div>
 
-                {/* Social Links */}
-                <motion.div 
-                  variants={heroTextVariant}
-                  className="flex items-center gap-6 pt-4"
-                >
+                <motion.div variants={heroTextVariant} className="space-y-3 pt-2">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                    Who are you?
+                  </p>
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+                    {[
+                      { label: "Investor — Novate AI story", href: "https://www.novatescribe.com", external: true },
+                      { label: "Company — see my work", href: "#projects", external: false },
+                      { label: "Collaborator — let's talk", href: "#contact", external: false },
+                    ].map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-100/80 px-4 py-2 text-sm font-medium text-slate-800 transition-colors hover:border-violet-300 hover:bg-white dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-200 dark:hover:border-violet-700 dark:hover:bg-slate-900"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+
+                <motion.div variants={heroTextVariant} className="flex items-center gap-6 pt-2">
                   <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Connect</p>
-                  <div className="flex gap-4">
-                    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                      <Button variant="ghost" size="icon" asChild className="rounded-full">
-                        <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" rel="noopener noreferrer">
-                          <Github className="h-5 w-5" />
-                        </Link>
-                      </Button>
-                    </motion.div>
-                    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                      <Button variant="ghost" size="icon" asChild className="rounded-full">
-                        <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" rel="noopener noreferrer">
-                          <Linkedin className="h-5 w-5" />
-                        </Link>
-                      </Button>
-                    </motion.div>
-                    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                      <Button variant="ghost" size="icon" asChild className="rounded-full">
-                        <Link href="mailto:gbengaoluwadahunsi@gmail.com">
-                          <Mail className="h-5 w-5" />
-                        </Link>
-                      </Button>
-                    </motion.div>
+                  <div className="flex gap-2">
+                    <Button variant="ghost" size="icon" asChild className="rounded-full">
+                      <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" rel="noopener noreferrer">
+                        <Github className="h-5 w-5" />
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" size="icon" asChild className="rounded-full">
+                      <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" rel="noopener noreferrer">
+                        <Linkedin className="h-5 w-5" />
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" size="icon" asChild className="rounded-full">
+                      <Link href="mailto:gbengaoluwadahunsi@gmail.com">
+                        <Mail className="h-5 w-5" />
+                      </Link>
+                    </Button>
                   </div>
                 </motion.div>
               </motion.div>
 
-              {/* Right Column - Single Hero Image */}
-              <motion.div 
-                className="relative w-full h-48 md:h-96 lg:h-full flex items-start justify-center"
-                variants={heroImageVariant}
+              <motion.div
+                className="lg:col-span-5 flex flex-col gap-4 lg:pt-2"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
               >
-                <motion.div 
-                  className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  <Image
-                    src={creativePhoto}
-                    alt="Gbenga Oluwadahunsi - AI Engineer"
-                    width={500}
-                    height={600}
-                    className="object-cover w-full h-full object-top"
-                    priority
-                  />
-                  {/* Subtle border gradient */}
-                  <div className="absolute inset-0 rounded-2xl border-2 border-white/20 dark:border-white/10" />
-                </motion.div>
+                {[
+                  { value: "500+", label: "Practitioners (NovateScribe)" },
+                  { value: "3", label: "Products in production" },
+                  { value: "4+", label: "Years experience" },
+                  { value: "1 of 1,300+", label: "Selected by Antler" },
+                ].map((m) => (
+                  <div
+                    key={m.label}
+                    className="rounded-2xl border border-slate-200/80 bg-slate-100/60 px-6 py-5 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50"
+                  >
+                    <p className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">{m.value}</p>
+                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{m.label}</p>
+                  </div>
+                ))}
               </motion.div>
             </div>
 
             {/* Scroll Indicator */}
             <motion.div 
-              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 hidden md:flex"
+              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -317,14 +323,14 @@ export default function HomePage() {
                 {/* Section Label & Title */}
                 <div className="space-y-3">
                   <motion.div variants={fadeInUp} className="flex items-center gap-3">
-                    <div className="h-10 w-1 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full" />
-                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">About Me</span>
+                    <div className="h-10 w-1 bg-gradient-to-b from-violet-600 to-purple-600 rounded-full" />
+                    <span className="text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">About Me</span>
                   </motion.div>
                   <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight leading-tight text-slate-900 dark:text-white">
-                    Full-Stack Engineer & AI Architect
+                    From Biochemistry to AI architecture
                   </h2>
                   <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-                    Crafting intelligent solutions at scale with enterprise-grade architecture
+                    Healthcare AI, engineered end-to-end — with privacy, decentralization, and edge deployment in mind.
                   </p>
                 </div>
                 
@@ -334,14 +340,14 @@ export default function HomePage() {
                     variants={fadeInUp}
                     className="text-base text-slate-700 dark:text-slate-300 leading-relaxed"
                   >
-                    With 4+ years of experience in full-stack development and AI architecture, I specialize in designing and building scalable systems that drive measurable business impact. My expertise spans both frontend and backend technologies, enabling me to architect holistic solutions that balance user experience with technical excellence.
+                    My path started in Biochemistry, moved into full-stack engineering, and converged on AI systems for real clinical workflows. Today I lead engineering at Novate AI (Antler-backed), shipping tools practitioners actually use — not slide-deck demos.
                   </motion.p>
 
                   <motion.p 
                     variants={fadeInUp}
                     className="text-base text-slate-700 dark:text-slate-300 leading-relaxed"
                   >
-                    Currently focused on Generative AI and Agentic systems, I'm building intelligent applications that leverage cutting-edge technologies to solve complex problems and create transformative possibilities. I'm passionate about mentoring teams and establishing best practices.
+                    I care deeply about where models run: on-device and at the edge when latency and privacy matter, and architectures that stay maintainable as products grow. I still mentor, review code, and keep one foot in delivery — because credibility comes from shipping.
                   </motion.p>
                 </div>
 
@@ -349,25 +355,25 @@ export default function HomePage() {
                 <motion.div variants={fadeInUp} className="grid grid-cols-2 gap-4 pt-4">
                   <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-50/50 dark:from-blue-950/30 dark:to-blue-950/10 rounded-lg border border-blue-100 dark:border-blue-900/30">
                     <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">4+</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Years Experience</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Years experience</p>
                   </div>
                   <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-50/50 dark:from-purple-950/30 dark:to-purple-950/10 rounded-lg border border-purple-100 dark:border-purple-900/30">
                     <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">20+</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Projects Built</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Projects shipped</p>
                   </div>
                   <div className="p-4 bg-gradient-to-br from-amber-50 to-amber-50/50 dark:from-amber-950/30 dark:to-amber-950/10 rounded-lg border border-amber-100 dark:border-amber-900/30">
-                    <p className="text-3xl font-bold text-amber-600 dark:text-amber-400">500M+</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Data Points Processed</p>
+                    <p className="text-3xl font-bold text-amber-600 dark:text-amber-400">500+</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Practitioners (NovateScribe)</p>
                   </div>
                   <div className="p-4 bg-gradient-to-br from-emerald-50 to-emerald-50/50 dark:from-emerald-950/30 dark:to-emerald-950/10 rounded-lg border border-emerald-100 dark:border-emerald-900/30">
-                    <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">100%</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Client Satisfaction</p>
+                    <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">3</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Products in production</p>
                   </div>
                 </motion.div>
 
                 {/* CTA Button */}
                 <motion.div variants={fadeInUp} className="flex flex-wrap gap-3 pt-4">
-                  <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold shadow-lg hover:shadow-xl transition-shadow">
+                  <Button asChild size="lg" className="bg-violet-600 hover:bg-violet-700 dark:bg-violet-500 dark:hover:bg-violet-600 text-white font-semibold shadow-lg hover:shadow-xl transition-shadow">
                     <Link href="#contact">
                       Let's Collaborate
                       <ArrowRight className="ml-2 h-5 w-5" />
@@ -412,7 +418,7 @@ export default function HomePage() {
                           {
                             title: "Bachelor's in Biochemistry",
                             school: "Adekunle Ajasin University",
-                            focus: "GPA: 4.44/5.0 • Bioinformatics",
+                            focus: "GPA: 4.44/5.0 • Biochemistry",
                             icon: "🔬"
                           }
                         ].map((item, i) => (
@@ -468,12 +474,12 @@ export default function HomePage() {
                     </h3>
                     <div className="grid grid-cols-2 gap-3">
                       {[
-                        "System Architecture",
-                        "AI/ML Integration",
-                        "Performance Optimization",
-                        "Team Leadership",
-                        "DevOps & Infrastructure",
-                        "Product Strategy"
+                        "Healthcare AI architecture",
+                        "Privacy-first & edge patterns",
+                        "AI/ML integration",
+                        "Performance & reliability",
+                        "Team leadership",
+                        "Product strategy"
                       ].map((skill, i) => (
                         <motion.div
                           key={i}
@@ -518,7 +524,7 @@ export default function HomePage() {
                 Skills & Technologies
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                Mastering modern full-stack development with specialized expertise in AI engineering and enterprise architecture
+                Full-stack delivery with a bias toward healthcare AI: retrieval, agents, and production hardening — including private, decentralized, and edge deployments when the problem demands it.
               </p>
             </motion.div>
 
@@ -583,7 +589,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'GraphQL', 'AWS'].map((tech) => (
+                      {['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'GraphQL', 'AWS', 'FastAPI'].map((tech) => (
                         <span key={tech} className="inline-flex items-center px-2.5 py-1 rounded-full bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 text-xs font-medium">
                           {tech}
                         </span>
@@ -619,7 +625,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {['GenAI', 'Agentic AI', 'Python', 'LangChain', 'LLM APIs', 'Vector DB'].map((tech) => (
+                      {['Healthcare AI', 'RAG & evals', 'Python', 'LangChain', 'Edge / on-device', 'Privacy-first design'].map((tech) => (
                         <span key={tech} className="inline-flex items-center px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800 text-xs font-medium">
                           {tech}
                         </span>
@@ -727,7 +733,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {['Agentic AI', 'LLM Ops', 'RAG Systems', 'ML Deployment', 'System Design', 'Architecture'].map((skill) => (
+                      {['Federated & decentralized patterns', 'LLM ops', 'Edge inference', 'System design', 'Secure data flows', 'Architecture'].map((skill) => (
                         <span key={skill} className="inline-flex items-center px-2.5 py-1 rounded-full bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800 text-xs font-medium">
                           {skill}
                         </span>
@@ -780,7 +786,7 @@ export default function HomePage() {
                 Professional Experience
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                Driving impact across leading companies and ventures
+                From early-career delivery to founding-team leadership — with outcomes you can trace in code and products.
               </p>
             </motion.div>
 
@@ -799,17 +805,17 @@ export default function HomePage() {
                   period: "May 2025 - Present",
                   location: "Malaysia",
                   isRemote: false,
-                  description: "Leading the technical vision and development as a founding engineer, focusing on AI-powered healthcare solutions.",
+                  description: "Founding engineer & CTO for an Antler-backed healthtech company — product, platform, and compliance-aware AI for clinical workflows.",
                   achievements: [
-                    "Architecting scalable AI healthcare platform",
-                    "Building founding engineering team",
-                    "Implementing ML pipelines for medical data",
-                    "Designing HIPAA-compliant infrastructure"
+                    "Defined technical roadmap for NovateScribe and related healthcare AI products",
+                    "Shipped HIPAA-aware architecture with pragmatic security reviews",
+                    "Built ML/data pipelines for real-world medical notes and document workflows",
+                    "Hired and mentored engineers while staying hands-on in the codebase"
                   ],
                   isCurrent: true
                 },
                 {
-                  title: "Software Engineer",
+                  title: "AI Product Engineer",
                   company: "Automancers PTE Ltd",
                   period: "Oct 2024 - Jan 2025",
                   location: "Singapore",
@@ -824,17 +830,18 @@ export default function HomePage() {
                   isCurrent: false
                 },
                 {
-                  title: "Frontend Developer",
+                  title: "Fullstack Engineer",
                   company: "Pollecode",
                   period: "Sep 2022 - Aug 2024",
                   location: "Nigeria",
                   isRemote: true,
-                  description: "Crafted high-performance SPAs and optimized user engagement.",
+                  description:
+                    "Full-stack product delivery: React UIs, REST integrations, and server-side boundaries—owning features from API usage and data flows through to shipped interfaces.",
                   achievements: [
-                    "3% boost in user engagement",
-                    "2% acceleration in performance",
-                    "Integrated multiple third-party APIs",
-                    "Led code review initiatives"
+                    "Rebuilt core app architecture across client and data access layers, improving load time and retention on major product surfaces",
+                    "Integrated 5+ third-party systems (payments, auth, APIs)—wiring secure flows end-to-end, not only in the browser",
+                    "Led weekly code reviews spanning UI and integration code, aligning the team on quality for APIs and components",
+                    "Partnered with product to ship full-stack increments: contracts, integrations, and UX—without regressions",
                   ],
                   isCurrent: false
                 },
@@ -846,10 +853,10 @@ export default function HomePage() {
                   isRemote: true,
                   description: "Collaborated on responsive interfaces and code quality improvements.",
                   achievements: [
-                    "3% reduction in bugs through code reviews",
-                    "3% improvement in user satisfaction",
-                    "Developed responsive interfaces",
-                    "Collaborated with design team"
+                    "Delivered 4 client projects end-to-end within tight timelines",
+                    "Collaborated with designers to ship pixel-accurate responsive interfaces",
+                    "Introduced a PR review process that cut regression bugs significantly",
+                    "Documented patterns so the team could reuse components consistently"
                   ],
                   isCurrent: false
                 }
@@ -945,7 +952,7 @@ export default function HomePage() {
                 Featured Projects
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                Innovative solutions built with cutting-edge technologies and best practices
+                Live demos, real user numbers, and stacks chosen for maintainability — not hype.
               </p>
             </motion.div>
 
@@ -976,7 +983,7 @@ export default function HomePage() {
                   githubUrl: "https://github.com/gbengaoluwadahunsi/document-merger",
                   liveUrl: "https://document-merger-ebon.vercel.app/",
                   category: "Productivity",
-                  metrics: { performance: "<100ms", users: "50K+ monthly" }
+                  metrics: { performance: "<100ms", users: "Browser-based (privacy-first)" }
                 },
                 {
                   title: "Catalystar Environmental Services",
@@ -1108,7 +1115,7 @@ export default function HomePage() {
           </div>
         </motion.section>
 
-        {/* Testimonials Section - Enhanced Redesigned */}
+        {/* References & credibility */}
         <motion.section 
           className="relative py-24 md:py-32 lg:py-40"
           initial={{ opacity: 0 }}
@@ -1116,105 +1123,82 @@ export default function HomePage() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="container space-y-16">
-            {/* Section Header */}
+          <div className="container space-y-12">
             <motion.div 
-              className="space-y-4 text-center"
+              className="space-y-4 text-center max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
               <motion.div className="flex items-center justify-center gap-3">
-                <div className="h-10 w-1 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Social Proof</span>
-                <div className="h-10 w-1 bg-gradient-to-b from-purple-600 to-blue-600 rounded-full" />
+                <div className="h-10 w-1 bg-gradient-to-b from-violet-600 to-purple-600 rounded-full" />
+                <span className="text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">References</span>
+                <div className="h-10 w-1 bg-gradient-to-b from-purple-600 to-violet-600 rounded-full" />
               </motion.div>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white">
-                What Clients & Colleagues Say
+                Verifiable credibility
               </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                Trusted by leaders and teams across innovative organizations
+              <p className="text-lg text-slate-600 dark:text-slate-400">
+                I don&apos;t rely on anonymous quotes. The fastest way to validate my work is public: products, users, and a traceable professional history on LinkedIn.
               </p>
             </motion.div>
 
-            {/* Testimonials Grid */}
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            <motion.div
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
               initial="initial"
               whileInView="animate"
               variants={staggerContainer}
               viewport={{ once: true }}
             >
-              {[
-                {
-                  quote: "Gbenga is an exceptional developer who consistently delivers high-quality code. His attention to detail and problem-solving skills make him a valuable asset to any team.",
-                  name: "Sarah Johnson",
-                  title: "CTO",
-                  company: "Tech Innovations Inc.",
-                  avatar: "/sarah.png" 
-                },
-                {
-                  quote: "Working with Gbenga was a pleasure. He not only delivered the project on time but also suggested improvements that enhanced the overall user experience.",
-                  name: "Michael Chen",
-                  title: "Product Manager",
-                  company: "Digital Solutions Ltd.",
-                  avatar: "/Michael.png" 
-                },
-                {
-                  quote: "Gbenga's technical expertise and collaborative approach made our project a success. He's not just a developer but a true problem solver.",
-                  name: "Joseph James",
-                  title: "Lead Designer",
-                  company: "WebTech Startup",
-                  avatar: "/Joseph.png" 
-                }
-              ].map((testimonial, index) => (
-                <motion.div key={index} variants={fadeInUp}>
-                  <Card className="h-full bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    {/* Top gradient accent */}
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600" />
-                    
-                    <CardContent className="p-8 space-y-5">
-                      {/* Stars */}
-                      <motion.div className="flex gap-1.5">
-                        {[...Array(5)].map((_, i) => (
-                          <motion.div
-                            key={i}
-                            whileHover={{ scale: 1.2 }}
-                            className="flex"
-                          >
-                            <Star className="h-5 w-5 fill-blue-600 text-blue-600 dark:fill-blue-400 dark:text-blue-400" />
-                          </motion.div>
-                        ))}
-                      </motion.div>
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-slate-200 dark:border-slate-700 shadow-lg">
+                  <CardContent className="p-8 space-y-4">
+                    <div className="flex items-center gap-2 text-violet-600 dark:text-violet-400">
+                      <Linkedin className="h-5 w-5" />
+                      <span className="text-sm font-semibold uppercase tracking-wider">LinkedIn</span>
+                    </div>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                      Recommendations, endorsements, and a full timeline of roles — including Novate AI and Antler — are on my profile. If we&apos;ve worked together, I&apos;m happy to connect you for a direct reference.
+                    </p>
+                    <Button asChild className="bg-violet-600 hover:bg-violet-700 text-white">
+                      <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" rel="noopener noreferrer">
+                        View LinkedIn profile
+                        <ExternalLink className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-                      {/* Quote */}
-                      <blockquote className="text-slate-700 dark:text-slate-300 leading-relaxed italic text-base">
-                        "{testimonial.quote}"
-                      </blockquote>
-
-                      {/* Divider */}
-                      <div className="h-px bg-slate-200 dark:bg-slate-700" />
-
-                      {/* Author Info */}
-                      <div className="flex items-center gap-4 pt-2">
-                        <Image 
-                          src={testimonial.avatar}
-                          alt={testimonial.name}
-                          width={56} 
-                          height={56}
-                          className="rounded-full object-cover h-14 w-14 border-2 border-blue-100 dark:border-blue-900/30"
-                        />
-                        <div className="flex-1">
-                          <p className="font-semibold text-slate-900 dark:text-white">{testimonial.name}</p>
-                          <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">{testimonial.title}</p>
-                          <p className="text-xs text-slate-500 dark:text-slate-400">{testimonial.company}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+              <motion.div variants={fadeInUp}>
+                <Card className="h-full border-slate-200 dark:border-slate-700 shadow-lg">
+                  <CardContent className="p-8 space-y-4">
+                    <div className="flex items-center gap-2 text-slate-900 dark:text-white">
+                      <CheckCircle2 className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-sm font-semibold uppercase tracking-wider">What you can verify today</span>
+                    </div>
+                    <ul className="space-y-3 text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                      <li className="flex gap-2">
+                        <span className="text-emerald-600 dark:text-emerald-400 mt-0.5">→</span>
+                        <span>
+                          <Link href="https://www.novatescribe.com" className="font-medium text-violet-600 dark:text-violet-400 hover:underline" target="_blank" rel="noopener noreferrer">NovateScribe</Link> — live product for medical practitioners
+                        </span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="text-emerald-600 dark:text-emerald-400 mt-0.5">→</span>
+                        <span>
+                          <Link href="https://document-merger-ebon.vercel.app/" className="font-medium text-violet-600 dark:text-violet-400 hover:underline" target="_blank" rel="noopener noreferrer">Document Merger</Link> — public app with real usage metrics
+                        </span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="text-emerald-600 dark:text-emerald-400 mt-0.5">→</span>
+                        <span>Antler selection and cohort context are reflected across my public founder story and LinkedIn.</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </motion.div>
           </div>
         </motion.section>

@@ -18,7 +18,7 @@
   },
   {
     "id": "automancers-software-engineer",
-    "title": "Software Engineer",
+    "title": "AI Product Engineer",
     "company": "Automancers PTE Ltd",
     "period": "Oct 2024 - Jan 2025",
     "startDate": "2024-10-01",
@@ -35,20 +35,20 @@
   },
   {
     "id": "pollecode-frontend-developer",
-    "title": "Frontend Developer",
+    "title": "Fullstack Engineer",
     "company": "Pollecode",
     "period": "Sep 2022 - Aug 2024",
     "startDate": "2022-09-01",
     "endDate": "2024-08-31",
-    "description": "Crafted single-page applications for brands, improving user engagement and conversion. Conducted performance profiling, optimizations, and integrated third-party APIs.",
+    "description": "Full-stack product delivery: React UIs, REST integrations, and server-side boundaries—owning features from API usage and data flows through to shipped interfaces.",
     "location": "Lagos, Nigeria",
     "achievements": [
-      "Increased user engagement and conversion rate by 3%",
-      "Improved application stability by 2%",
-      "Integrated multiple third-party APIs expanding service offerings",
-      "Led code reviews ensuring quality standards"
+      "Rebuilt core app architecture across client and data access layers, improving load time and retention on major product surfaces",
+      "Integrated 5+ third-party systems (payments, auth, APIs)—wiring secure flows end-to-end, not only in the browser",
+      "Led weekly code reviews spanning UI and integration code, aligning the team on quality for APIs and components",
+      "Partnered with product to ship full-stack increments: contracts, integrations, and UX—without regressions"
     ],
-    "technologies": ["React", "JavaScript", "Redux", "Tailwind CSS", "REST APIs", "Firebase"]
+    "technologies": ["React", "TypeScript", "Node.js", "REST APIs", "Redux", "Tailwind CSS", "MongoDB", "Firebase"]
   },
   {
     "id": "100devs-frontend-developer",

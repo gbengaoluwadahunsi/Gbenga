@@ -1,32 +1,36 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Playfair_Display } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gbengaoluwadahunsi.vercel.app'),
-  title: "Gbenga Oluwadahunsi - AI Engineer, FullStack Developer & Tech Entrepreneur",
+  title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare · Edge & Private AI)",
   description:
-    "Gbenga Oluwadahunsi is a professional AI Engineer, Full Stack Developer, and Tech Entrepreneur specializing in modern web technologies, artificial intelligence, and environmental solutions. Creator of NovateScribe, Catalystar Environmental Services, and multiple innovative web applications.",
+    "Biochemistry-trained AI engineer and CTO at Novate AI (Antler-backed), building healthcare AI systems—from architecture to deployment—with a focus on privacy-preserving, decentralized, and edge AI.",
   keywords: [
-    "Gbenga Oluwadahunsi", 
-    "AI Engineer", 
-    "Full Stack Developer", 
-    "Tech Entrepreneur",
-    "Software Engineer", 
-    "React Developer", 
-    "Next.js Developer", 
-    "TypeScript Developer", 
-    "Node.js Developer",
+    "Gbenga Oluwadahunsi",
+    "AI Engineer",
+    "Healthcare AI",
+    "Edge AI",
+    "Private AI",
+    "Decentralized AI",
+    "Novate AI",
+    "Antler",
+    "Full Stack Developer",
+    "Software Engineer",
+    "Next.js",
+    "TypeScript",
     "NovateScribe",
-    "Catalystar Environmental Services",
-    "Web Developer Nigeria",
-    "AI Developer",
-    "Environmental Technology"
   ],
   authors: [{ name: "Gbenga Oluwadahunsi", url: "https://gbengaoluwadahunsi.vercel.app" }],
   creator: "Gbenga Oluwadahunsi",
@@ -54,9 +58,9 @@ export const metadata: Metadata = {
     apple: "/O.png",
   },
   openGraph: {
-    title: "Gbenga Oluwadahunsi - AI Engineer, FullStack Developer & Tech Entrepreneur",
+    title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare · Edge & Private AI)",
     description:
-      "Professional AI Engineer, Full Stack Developer, and Tech Entrepreneur specializing in modern web technologies, artificial intelligence, and environmental solutions. Creator of NovateScribe and Catalystar Environmental Services.",
+      "CTO at Novate AI (Antler-backed). Biochemistry → AI architecture: intelligent systems for healthcare with a focus on privacy-preserving and edge deployment.",
     url: "https://gbengaoluwadahunsi.vercel.app",
     siteName: "Gbenga Oluwadahunsi Portfolio",
     images: [
@@ -72,8 +76,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gbenga Oluwadahunsi - AI Engineer & FullStack Developer",
-    description: "Professional AI Engineer, Full Stack Developer, and Tech Entrepreneur specializing in modern web technologies and artificial intelligence.",
+    title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare AI)",
+    description:
+      "Biochemistry-trained AI engineer. CTO at Novate AI. Healthcare, edge, and privacy-first intelligent systems.",
     images: ["/og-image.png"],
     creator: "@gbengaoluwadahunsi", // Add your Twitter handle if you have one
   },
@@ -91,8 +96,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Gbenga Oluwadahunsi",
-    "jobTitle": ["AI Engineer", "Full Stack Developer", "Tech Entrepreneur"],
-    "description": "Professional AI Engineer, Full Stack Developer, and Tech Entrepreneur specializing in modern web technologies, artificial intelligence, and environmental solutions.",
+    "jobTitle": "AI Engineer & CTO",
+    "description": "AI engineer focused on healthcare: privacy-preserving, decentralized, and edge AI. CTO at Novate AI (Antler-backed).",
     "url": "https://gbengaoluwadahunsi.vercel.app",
     "sameAs": [
       "https://github.com/gbengaoluwadahunsi",
@@ -114,14 +119,13 @@ export default function RootLayout({
     ],
     "knowsAbout": [
       "Artificial Intelligence",
+      "Healthcare Technology",
+      "Edge Computing",
+      "Privacy-Preserving AI",
       "Full Stack Development",
-      "React.js",
       "Next.js",
       "TypeScript",
-      "Node.js",
-      "Environmental Technology",
-      "Web Development",
-      "Software Engineering"
+      "System Architecture"
     ],
     "alumniOf": {
       "@type": "Organization",
@@ -142,7 +146,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} ${inter.variable} ${playfair.variable}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

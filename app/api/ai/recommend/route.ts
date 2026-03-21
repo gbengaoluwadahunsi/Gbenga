@@ -1,6 +1,32 @@
 import { NextRequest, NextResponse } from "next/server"
 import type { Project } from "@/types"
 
+/** Normalize for fuzzy match: strip punctuation and extra spaces. */
+function norm(s: string) {
+  return s
+    .toLowerCase()
+    .replace(/[/,&]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+}
+
+function tokens(s: string) {
+  return norm(s)
+    .split(" ")
+    .filter((t) => t.length > 1)
+}
+
+/** True if interest matches tech label (substring either way or shared token). */
+function interestMatches(interest: string, tech: string): boolean {
+  const a = norm(interest)
+  const b = norm(tech)
+  if (a.length < 2 || b.length < 2) return false
+  if (b.includes(a) || a.includes(b)) return true
+  const ta = tokens(interest)
+  const tb = tokens(tech)
+  return ta.some((x) => tb.some((y) => x === y || y.includes(x) || x.includes(y)))
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { interests, projects } = await request.json()
@@ -23,11 +49,22 @@ export async function POST(request: NextRequest) {
     const scoredProjects = projects.map((project: Project) => {
       let score = 0
 
-      // Check technology matches
-      const projectTechs = project.technologies.map((t) => t.toLowerCase())
-      interests.forEach((interest) => {
+      const projectTechs = (project.technologies || []).map((t) => t.toLowerCase())
+      const blob = projectTechs.join(" ").toLowerCase()
+
+      interests.forEach((interest: string) => {
         const lowerInterest = interest.toLowerCase()
-        if (projectTechs.some((tech) => tech.includes(lowerInterest))) {
+        let matched = false
+        for (const tech of projectTechs) {
+          if (interestMatches(interest, tech)) {
+            matched = true
+            break
+          }
+        }
+        if (!matched && blob.includes(lowerInterest.replace(/\s+/g, " ").trim())) {
+          matched = true
+        }
+        if (matched) {
           score += 2
         }
       })

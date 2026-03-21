@@ -95,10 +95,11 @@ export class DataLoader {
       tools: Skill[]
       soft: Skill[]
     }
+    // AI / ML first so APIs and the recommender surface engineering focus before web-only tags
     return [
+      ...skillsTyped.ai,
       ...skillsTyped.frontend,
       ...skillsTyped.backend,
-      ...skillsTyped.ai,
       ...skillsTyped.tools,
       ...skillsTyped.soft
     ]
