@@ -404,6 +404,24 @@ export default function HomePage() {
                       <div className="space-y-5">
                         {[
                           {
+                            title: "PhD Candidate, Biomedical Sciences (Pharmacology)",
+                            school: "University of Science, Malaysia",
+                            focus: "Viva pending",
+                            icon: "🎓"
+                          },
+                          {
+                            title: "Master's in Industrial Biochemistry",
+                            school: "University of Ibadan",
+                            focus: "Graduate studies — Industrial Biochemistry",
+                            icon: "🧪"
+                          },
+                          {
+                            title: "Bachelor's in Biochemistry",
+                            school: "Adekunle Ajasin University",
+                            focus: "GPA: 4.44/5.0 • Biochemistry",
+                            icon: "🔬"
+                          },
+                          {
                             title: "Diploma in Software Engineering",
                             school: "Alt School",
                             focus: "React, Vue, Node.js, Modern Web Stack",
@@ -414,12 +432,6 @@ export default function HomePage() {
                             school: "University of Helsinki",
                             focus: "MERN Stack, GraphQL, TypeScript",
                             icon: "💻"
-                          },
-                          {
-                            title: "Bachelor's in Biochemistry",
-                            school: "Adekunle Ajasin University",
-                            focus: "GPA: 4.44/5.0 • Biochemistry",
-                            icon: "🔬"
                           }
                         ].map((item, i) => (
                           <motion.div 
