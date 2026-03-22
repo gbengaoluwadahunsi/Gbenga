@@ -139,6 +139,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preload" href="/me.jpg" as="image" type="image/jpeg" />
+        <link rel="preload" href="/me2.png" as="image" type="image/png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -146,7 +148,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} ${inter.variable} ${playfair.variable}`}>
+      <body
+        className={`${inter.className} ${inter.variable} ${playfair.variable}`}
+        suppressHydrationWarning
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

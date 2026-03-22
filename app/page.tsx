@@ -1,9 +1,10 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { ArrowRight, Download, Github, Linkedin, Mail, Sparkles, ExternalLink, Code2, Zap, Users, TrendingUp, CheckCircle2, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { ProjectRecommender } from "../src/components/ai/project-recommender"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -18,7 +19,14 @@ import { ThemeSwitcher } from "@/components/theme-switcher"
 const heroTextVariant = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, ease: "easeOut" }
+  transition: { duration: 0.8, ease: "easeOut" },
+}
+
+/** Hero intro: no stagger / fade-in so copy and photo read together on first paint */
+const heroIntroVariant = {
+  initial: { opacity: 1, y: 0 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0 },
 }
 
 const badgeVariant = {
@@ -55,6 +63,13 @@ const staggerContainer = {
 }
 
 export default function HomePage() {
+  const [heroIdentity, setHeroIdentity] = useState(false)
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setHeroIdentity(true), 7000)
+    return () => window.clearTimeout(id)
+  }, [])
+
   return (
     <motion.div className="flex min-h-screen flex-col">
       {/* Header */}
@@ -122,16 +137,40 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative w-full overflow-hidden py-16 md:py-24 lg:py-32">
           {/* Background photo: visible; light scrim keeps type readable */}
-          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
-            <Image
-              src="/me.jpg"
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-[center_22%_center] brightness-[0.98] saturate-[0.92] dark:brightness-[0.88] dark:saturate-[0.9]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-50/58 via-white/52 to-violet-100/38 dark:from-slate-950/45 dark:via-slate-900/48 dark:to-violet-950/30" />
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-slate-900" aria-hidden>
+            <motion.div
+              className="absolute inset-0"
+              initial={false}
+              animate={{ opacity: heroIdentity ? 0 : 1 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+            >
+              <Image
+                src="/me.jpg"
+                alt=""
+                fill
+                priority
+                fetchPriority="high"
+                sizes="100vw"
+                className="object-cover object-[center_22%_center] brightness-[0.98] saturate-[0.92] dark:brightness-[0.88] dark:saturate-[0.9]"
+              />
+            </motion.div>
+            <motion.div
+              className="absolute inset-0"
+              initial={false}
+              animate={{ opacity: heroIdentity ? 1 : 0 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+            >
+              <Image
+                src="/me2.png"
+                alt=""
+                fill
+                sizes="100vw"
+                loading="eager"
+                fetchPriority="high"
+                className="object-cover object-[center_45%_center] brightness-[0.98] saturate-[0.92] dark:brightness-[0.88] dark:saturate-[0.9]"
+              />
+            </motion.div>
+            <div className="absolute inset-0 z-[1] bg-gradient-to-br from-slate-50/58 via-white/52 to-violet-100/38 dark:from-slate-950/45 dark:via-slate-900/48 dark:to-violet-950/30" />
           </div>
 
           <motion.div
@@ -147,137 +186,258 @@ export default function HomePage() {
 
           <div className="container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-              <motion.div
-                className="lg:col-span-7 flex flex-col justify-center space-y-8"
-                initial="initial"
-                animate="animate"
-                variants={{ animate: { transition: { staggerChildren: 0.12 } } }}
-              >
-                <motion.div variants={heroTextVariant} className="flex flex-wrap gap-2">
-                  <span className="inline-flex items-center rounded-full bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm">
-                    Available for work
-                  </span>
-                  <span className="inline-flex items-center rounded-full border border-violet-200 bg-violet-100/90 px-3 py-1.5 text-xs font-semibold text-violet-900 dark:border-violet-800 dark:bg-violet-950/60 dark:text-violet-100">
-                    Antler-backed founder
-                  </span>
-                </motion.div>
+              <div className="relative min-h-[28rem] lg:col-span-12 lg:max-w-4xl lg:min-h-[32rem]">
+                <AnimatePresence mode="wait">
+                  {!heroIdentity ? (
+                    <motion.div
+                      key="hero-intro"
+                      className="flex flex-col justify-center space-y-8"
+                      initial="initial"
+                      animate="animate"
+                      exit={{ opacity: 0, transition: { duration: 0.35 } }}
+                      variants={{ animate: { transition: { staggerChildren: 0 } } }}
+                    >
+                      <motion.div variants={heroIntroVariant} className="flex flex-wrap gap-2">
+                        <span className="inline-flex items-center rounded-full bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm shadow-blue-900/25">
+                          Available for work
+                        </span>
+                        <span className="inline-flex items-center rounded-full border border-violet-200 bg-violet-100/90 px-3 py-1.5 text-xs font-semibold text-violet-900 dark:border-violet-800 dark:bg-violet-950/60 dark:text-violet-100">
+                          Antler-backed founder
+                        </span>
+                      </motion.div>
 
-                <motion.div variants={heroTextVariant} className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.12] text-slate-900 dark:text-white dark:[text-shadow:0_2px_28px_rgba(0,0,0,0.55)]">
-                    Biochemist turned{" "}
-                    <span className="font-serif italic text-violet-600 dark:text-violet-400">AI architect</span>
-                    {" — "}building systems that matter.
-                  </h1>
-                  <p className="text-lg md:text-xl text-slate-600 dark:text-slate-200 dark:[text-shadow:0_1px_16px_rgba(0,0,0,0.45)] leading-relaxed max-w-2xl font-medium">
-                    I build AI systems at the intersection of healthcare and engineering — from architecture to deployment. Private, decentralized, and edge AI are where I spend my deepest technical focus.
-                  </p>
-                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 dark:[text-shadow:0_1px_12px_rgba(0,0,0,0.4)] leading-relaxed max-w-2xl">
-                    CTO at Novate AI, co-building AI tools for healthcare practitioners. AI Engineer with 4+ years shipping production software and AI products.
-                  </p>
-                </motion.div>
+                      <motion.div variants={heroTextVariant} className="space-y-4">
+                        <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.12] text-slate-900 dark:text-white dark:[text-shadow:0_2px_28px_rgba(0,0,0,0.55)]">
+                          Biochemist turned{" "}
+                          <span className="font-serif italic text-violet-600 dark:text-violet-400">AI architect</span>
+                          {" — "}building systems that matter.
+                        </h1>
+                        <p className="text-lg md:text-xl text-slate-600 dark:text-slate-200 dark:[text-shadow:0_1px_16px_rgba(0,0,0,0.45)] leading-relaxed max-w-2xl font-medium">
+                          I build AI systems at the intersection of healthcare and engineering — from architecture to deployment. Private, decentralized, and edge AI are where I spend my deepest technical focus.
+                        </p>
+                        <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 dark:[text-shadow:0_1px_12px_rgba(0,0,0,0.4)] leading-relaxed max-w-2xl">
+                          CTO at Novate AI, co-building AI tools for healthcare practitioners. AI Engineer with 4+ years shipping production software and AI products.
+                        </p>
+                        <ul
+                          className="flex max-w-2xl flex-wrap gap-2 pt-1"
+                          aria-label="Technical specialties"
+                        >
+                          {[
+                            "Edge Inference",
+                            "Federated Learning",
+                            "Privacy-First AI",
+                            "Clinical NLP",
+                            "FDA SaMD",
+                          ].map((tag) => (
+                            <li key={tag}>
+                              <span className="inline-block rounded-md border border-blue-300/70 bg-blue-100 px-2.5 py-1.5 font-mono text-xs font-semibold tracking-wide text-slate-900 shadow-sm dark:border-blue-500/70 dark:bg-blue-700 dark:text-white dark:shadow-md dark:shadow-blue-950/50">
+                                {tag}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
 
-                <motion.div
-                  variants={heroTextVariant}
-                  className="flex flex-col sm:flex-row flex-wrap gap-3 pt-2"
-                >
-                  <Button
-                    asChild
-                    size="lg"
-                    className="w-full sm:w-auto bg-violet-600 hover:bg-violet-700 dark:bg-violet-500 dark:hover:bg-violet-600 text-white font-semibold shadow-md"
-                  >
-                    <Link href="#projects">
-                      See my work
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="w-full sm:w-auto border-slate-300 bg-white/80 dark:bg-slate-950/40 dark:border-slate-600"
-                  >
-                    <Link href="/Gbenga_Oluwadahunsi.pdf" target="_blank" rel="noopener noreferrer">
-                      Download resume
-                      <Download className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="w-full sm:w-auto border-slate-300 bg-white/80 dark:bg-slate-950/40 dark:border-slate-600"
-                  >
-                    <Link href="#contact">
-                      Get in touch
-                    </Link>
-                  </Button>
-                </motion.div>
-
-                <motion.div variants={heroTextVariant} className="space-y-3 pt-2">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-                    Who are you?
-                  </p>
-                  <div className="flex flex-col sm:flex-row flex-wrap gap-2">
-                    {[
-                      { label: "Investor — Novate AI story", href: "https://www.novatescribe.com", external: true },
-                      { label: "Company — see my work", href: "#projects", external: false },
-                      { label: "Collaborator — let's talk", href: "#contact", external: false },
-                    ].map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                        className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-100/80 px-4 py-2 text-sm font-medium text-slate-800 transition-colors hover:border-violet-300 hover:bg-white dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-200 dark:hover:border-violet-700 dark:hover:bg-slate-900"
+                      <motion.div
+                        variants={heroIntroVariant}
+                        className="flex flex-col sm:flex-row flex-wrap gap-3 pt-2"
                       >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                </motion.div>
+                        <Button
+                          asChild
+                          size="lg"
+                          className="w-full sm:w-auto bg-violet-600 hover:bg-violet-700 dark:bg-violet-500 dark:hover:bg-violet-600 text-white font-semibold shadow-md"
+                        >
+                          <Link href="#projects">
+                            See my work
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                          </Link>
+                        </Button>
+                        <Button
+                          asChild
+                          size="lg"
+                          variant="outline"
+                          className="w-full sm:w-auto border-slate-300 bg-white/80 dark:bg-slate-950/40 dark:border-slate-600"
+                        >
+                          <Link href="/Gbenga_Oluwadahunsi.pdf" target="_blank" rel="noopener noreferrer">
+                            Download resume
+                            <Download className="ml-2 h-5 w-5" />
+                          </Link>
+                        </Button>
+                        <Button
+                          asChild
+                          size="lg"
+                          variant="outline"
+                          className="w-full sm:w-auto border-slate-300 bg-white/80 dark:bg-slate-950/40 dark:border-slate-600"
+                        >
+                          <Link href="#contact">
+                            Get in touch
+                          </Link>
+                        </Button>
+                      </motion.div>
 
-                <motion.div variants={heroTextVariant} className="flex items-center gap-6 pt-2">
-                  <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Connect</p>
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="icon" asChild className="rounded-full">
-                      <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" rel="noopener noreferrer">
-                        <Github className="h-5 w-5" />
-                      </Link>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild className="rounded-full">
-                      <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" rel="noopener noreferrer">
-                        <Linkedin className="h-5 w-5" />
-                      </Link>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild className="rounded-full">
-                      <Link href="mailto:gbengaoluwadahunsi@gmail.com">
-                        <Mail className="h-5 w-5" />
-                      </Link>
-                    </Button>
-                  </div>
-                </motion.div>
-              </motion.div>
+                      <motion.div variants={heroIntroVariant} className="flex items-center gap-6 pt-2">
+                        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Connect</p>
+                        <div className="flex gap-2">
+                          <Button variant="ghost" size="icon" asChild className="rounded-full">
+                            <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" rel="noopener noreferrer">
+                              <Github className="h-5 w-5" />
+                            </Link>
+                          </Button>
+                          <Button variant="ghost" size="icon" asChild className="rounded-full">
+                            <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" rel="noopener noreferrer">
+                              <Linkedin className="h-5 w-5" />
+                            </Link>
+                          </Button>
+                          <Button variant="ghost" size="icon" asChild className="rounded-full">
+                            <Link href="mailto:gbengaoluwadahunsi@gmail.com">
+                              <Mail className="h-5 w-5" />
+                            </Link>
+                          </Button>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="hero-identity"
+                      className="flex flex-col justify-center space-y-8"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.45, ease: "easeOut" }}
+                    >
+                      <div className="flex flex-wrap gap-2">
+                        <span className="inline-flex items-center rounded-full bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white shadow-md shadow-blue-900/30 dark:shadow-blue-950/50">
+                          Available for work
+                        </span>
+                        <span className="inline-flex items-center rounded-full border border-violet-300 bg-violet-100/90 px-3 py-1.5 text-xs font-semibold text-violet-900 shadow-sm dark:border-violet-400/70 dark:bg-violet-500/85 dark:text-white dark:shadow-md dark:shadow-violet-900/40">
+                          Antler-backed founder
+                        </span>
+                      </div>
 
-              <motion.div
-                className="lg:col-span-5 flex flex-col gap-4 lg:pt-2"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-              >
-                {[
-                  { value: "500+", label: "Practitioners (NovateScribe)" },
-                  { value: "3", label: "Products in production" },
-                  { value: "4+", label: "Years experience" },
-                  { value: "1 of 1,300+", label: "Selected by Antler" },
-                ].map((m) => (
-                  <div
-                    key={m.label}
-                    className="rounded-2xl border border-slate-200/80 bg-slate-100/60 px-6 py-5 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/50"
-                  >
-                    <p className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">{m.value}</p>
-                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{m.label}</p>
-                  </div>
-                ))}
-              </motion.div>
+                      <div className="space-y-4">
+                        <p className="text-[11px] font-semibold tracking-[0.12em] text-blue-700 dark:text-blue-300 sm:text-xs dark:[text-shadow:0_1px_12px_rgba(0,0,0,0.75)]">
+                          AI Engineer | Healthcare AI
+                        </p>
+                        <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.12] text-slate-900 dark:text-white dark:[text-shadow:0_2px_28px_rgba(0,0,0,0.55)]">
+                          Gbenga{" "}
+                          <span className="font-serif italic text-violet-600 dark:text-violet-400">Oluwadahunsi</span>
+                        </h1>
+                        <p className="max-w-2xl text-lg font-medium leading-relaxed text-slate-600 dark:text-white/95 md:text-xl dark:[text-shadow:0_2px_16px_rgba(0,0,0,0.65)]">
+                          PhD Biomedical Sciences (Pharmacology) · Viva pending · CTO, Novate AI
+                        </p>
+                        <ul
+                          className="flex max-w-2xl flex-wrap gap-2 pt-1"
+                          aria-label="Technical focus"
+                        >
+                          {[
+                            "Clinical NLP",
+                            "Edge Inference",
+                            "Federated Learning",
+                            "Model Quantisation",
+                            "FDA SaMD",
+                            "Privacy-First Design",
+                          ].map((tag) => (
+                            <li key={tag}>
+                              <span className="inline-block rounded-md border border-blue-300/70 bg-blue-100 px-2.5 py-1.5 font-mono text-xs font-semibold tracking-wide text-slate-900 shadow-sm dark:border-blue-500/70 dark:bg-blue-700 dark:text-white dark:shadow-md dark:shadow-blue-950/50">
+                                {tag}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div
+                        className="grid grid-cols-1 gap-6 border-t border-slate-200/80 pt-6 dark:border-slate-500/50 sm:grid-cols-2"
+                        aria-label="Impact metrics"
+                      >
+                        {[
+                          { value: "3", label: "Products in production" },
+                          { value: "4+", label: "Years shipping AI systems" },
+                        ].map((row) => (
+                          <div key={row.label}>
+                            <p className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl dark:text-white dark:[text-shadow:0_2px_20px_rgba(0,0,0,0.55)]">
+                              {row.value}
+                            </p>
+                            <p className="mt-1 text-sm font-medium text-slate-700 dark:text-slate-100 dark:[text-shadow:0_1px_14px_rgba(0,0,0,0.85),0_0_1px_rgba(0,0,0,0.9)]">
+                              {row.label}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-col flex-wrap gap-3 pt-2 sm:flex-row">
+                        <Button
+                          asChild
+                          size="lg"
+                          className="w-full bg-violet-600 font-semibold text-white shadow-lg shadow-violet-900/40 hover:bg-violet-700 dark:bg-violet-500 dark:text-white dark:shadow-xl dark:shadow-violet-950/50 dark:hover:bg-violet-400 sm:w-auto"
+                        >
+                          <Link href="#projects">
+                            See my work
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                          </Link>
+                        </Button>
+                        <Button
+                          asChild
+                          size="lg"
+                          variant="secondary"
+                          className="w-full border border-slate-300 bg-white font-semibold !text-slate-900 shadow-sm hover:bg-slate-50 hover:!text-slate-950 dark:border-slate-500/50 dark:!bg-slate-950 dark:!text-white dark:hover:!bg-slate-900 dark:hover:!text-white sm:w-auto"
+                        >
+                          <Link href="/Gbenga_Oluwadahunsi.pdf" target="_blank" rel="noopener noreferrer">
+                            Download resume
+                            <Download className="ml-2 h-5 w-5" />
+                          </Link>
+                        </Button>
+                        <Button
+                          asChild
+                          size="lg"
+                          variant="secondary"
+                          className="w-full border border-slate-300 bg-white font-semibold !text-slate-900 shadow-sm hover:bg-slate-50 hover:!text-slate-950 dark:border-slate-500/50 dark:!bg-slate-950 dark:!text-white dark:hover:!bg-slate-900 dark:hover:!text-white sm:w-auto"
+                        >
+                          <Link href="#contact">Get in touch</Link>
+                        </Button>
+                      </div>
+
+                      <div className="flex items-center gap-6 pt-2">
+                        <p className="text-sm font-medium text-slate-600 dark:text-slate-100 dark:[text-shadow:0_1px_10px_rgba(0,0,0,0.55)]">
+                          Connect
+                        </p>
+                        <div className="flex gap-2">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            asChild
+                            className="rounded-full dark:border dark:border-white/35 dark:bg-white/15 text-slate-700 hover:bg-slate-100 dark:text-white dark:hover:bg-white/25"
+                          >
+                            <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" rel="noopener noreferrer">
+                              <Github className="h-5 w-5" />
+                            </Link>
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            asChild
+                            className="rounded-full dark:border dark:border-white/35 dark:bg-white/15 text-slate-700 hover:bg-slate-100 dark:text-white dark:hover:bg-white/25"
+                          >
+                            <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" rel="noopener noreferrer">
+                              <Linkedin className="h-5 w-5" />
+                            </Link>
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            asChild
+                            className="rounded-full dark:border dark:border-white/35 dark:bg-white/15 text-slate-700 hover:bg-slate-100 dark:text-white dark:hover:bg-white/25"
+                          >
+                            <Link href="mailto:gbengaoluwadahunsi@gmail.com">
+                              <Mail className="h-5 w-5" />
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
             {/* Scroll Indicator */}
@@ -362,8 +522,8 @@ export default function HomePage() {
                     <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Projects shipped</p>
                   </div>
                   <div className="p-4 bg-gradient-to-br from-amber-50 to-amber-50/50 dark:from-amber-950/30 dark:to-amber-950/10 rounded-lg border border-amber-100 dark:border-amber-900/30">
-                    <p className="text-3xl font-bold text-amber-600 dark:text-amber-400">500+</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Practitioners (NovateScribe)</p>
+                    <p className="text-3xl font-bold text-amber-600 dark:text-amber-400">PhD</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Biomedical Sciences (Pharmacology)</p>
                   </div>
                   <div className="p-4 bg-gradient-to-br from-emerald-50 to-emerald-50/50 dark:from-emerald-950/30 dark:to-emerald-950/10 rounded-lg border border-emerald-100 dark:border-emerald-900/30">
                     <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">3</p>
@@ -985,7 +1145,7 @@ export default function HomePage() {
                   githubUrl: "https://github.com/gbengaoluwadahunsi/Novate",
                   liveUrl: "https://www.novatescribe.com",
                   category: "AI/Healthcare",
-                  metrics: { performance: "99.9% uptime", users: "500+ practitioners" }
+                  metrics: { performance: "99.9% uptime", users: "Production healthcare AI" }
                 },
                 {
                   title: "Document Merger",
