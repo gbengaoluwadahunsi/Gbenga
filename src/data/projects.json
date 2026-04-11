@@ -5,7 +5,7 @@
     "description": "A web application that allows medical practitioners to take notes, generate summaries, and extract key information using AI.",
     "longDescription": "NovateScribe revolutionizes how medical practitioners manage patient notes and documentation. Features include real-time transcription, AI-powered summarization, secure data storage, and HIPAA-compliant processing. The platform integrates with electronic health records and offers intelligent insights extraction.",
     "technologies": ["Next.js", "TypeScript", "OpenAI API", "RAG", "LangChain", "Healthcare AI", "Node.js", "PostgreSQL", "AWS", "Express.js", "TailwindCSS", "HIPAA-aware ML"],
-    "imageUrl": "/novateScribe.png",
+    "imageUrl": "/novateScribe.jpeg",
     "githubUrl": "https://github.com/gbengaoluwadahunsi/Novate",
     "liveUrl": "https://www.novatescribe.com",
     "featured": true,
@@ -30,6 +30,60 @@
     ]
   },
   {
+    "id": "carouslk",
+    "title": "Carouslk",
+    "description": "A modern carousel generator for images and videos with customizable themes, transitions, and responsive layouts.",
+    "longDescription": "Carouslk is a powerful carousel creation tool that enables users to build beautiful, responsive carousels for images and videos. Features include customizable themes, smooth transitions, drag-and-drop reordering, multiple layout options, and export to various formats.",
+    "technologies": ["Next.js", "TypeScript", "TailwindCSS", "Framer Motion", "Dnd-kit", "Canvas API"],
+    "imageUrl": "/carouslk.jpeg",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/carouslk",
+    "liveUrl": "https://carouslk.vercel.app",
+    "featured": true,
+    "category": "Productivity",
+    "year": 2024,
+    "metrics": {
+      "performance": "60fps smooth animations",
+      "users": "Content creators & marketers",
+      "impact": "Carousel creation workflow"
+    }
+  },
+  {
+    "id": "audire",
+    "title": "Audire",
+    "description": "An AI-powered audio processing and enhancement tool that optimizes sound quality for podcasts and recordings.",
+    "longDescription": "Audire is an intelligent audio enhancement platform that helps creators improve their audio recordings. Using advanced AI algorithms, it removes background noise, normalizes volume levels, enhances clarity, and applies professional-grade processing. Perfect for podcasters, musicians, and content creators.",
+    "technologies": ["Next.js", "Python", "TensorFlow", "Web Audio API", "FFmpeg", "AWS Lambda", "TypeScript"],
+    "imageUrl": "/audire.jpeg",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/audire",
+    "liveUrl": "https://audire.app",
+    "featured": true,
+    "category": "AI/Audio",
+    "year": 2024,
+    "metrics": {
+      "performance": "Real-time processing",
+      "users": "Podcasters & musicians",
+      "impact": "Audio quality enhancement"
+    }
+  },
+  {
+    "id": "4casta",
+    "title": "4casta",
+    "description": "A modern URL shortener with analytics, custom aliases, and team collaboration features.",
+    "longDescription": "4casta is a feature-rich URL shortening service that combines simplicity with powerful analytics. Create memorable short links, track click data in real-time, manage team campaigns, and integrate with your workflow through APIs. Ideal for marketers, developers, and businesses.",
+    "technologies": ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Redis", "Vercel", "TailwindCSS"],
+    "imageUrl": "/4casta.jpeg",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/4casta",
+    "liveUrl": "https://4casta.com",
+    "featured": true,
+    "category": "Productivity",
+    "year": 2023,
+    "metrics": {
+      "performance": "<50ms redirect latency",
+      "users": "Marketers & developers",
+      "impact": "Link management workflow"
+    }
+  },
+  {
     "id": "doc-merger",
     "title": "Document Merger",
     "description": "A powerful browser-based tool that merges any combination of PDFs, Word documents, and images into organized multi-page files.",
@@ -48,55 +102,21 @@
     }
   },
   {
-    "id": "catalystar",
-    "title": "Catalystar Environmental Services",
-    "description": "Leading environmental consulting firm providing comprehensive solutions for sustainable development and environmental protection.",
-    "longDescription": "Catalystar is a professional environmental services platform offering environmental impact assessment, compliance auditing, laboratory testing services, and sustainability consulting. The platform showcases the firm's expertise and allows clients to book services online.",
-    "technologies": ["Next.js", "React", "TailwindCSS", "TypeScript", "Node.js"],
-    "imageUrl": "/catalystar.png",
-    "githubUrl": "https://github.com/gbengaoluwadahunsi/Catalystar",
-    "liveUrl": "https://catalystar.vercel.app/",
+    "id": "clinic-ddi",
+    "title": "ClinicDDI",
+    "description": "An advanced Drug-Drug Interaction (DDI) checker equipped with AI to protect clinical decision-making.",
+    "longDescription": "ClinicDDI is a sophisticated clinical decision support tool that uses AI to identify potential drug-drug interactions. Designed for healthcare professionals, it provides real-time alerts, evidentiary support for interactions, and suggests alternative medications to ensure patient safety in complex clinical environments.",
+    "technologies": ["Next.js", "TypeScript", "AI/ML", "Healthcare Data", "Node.js", "Python"],
+    "imageUrl": "/clinicDDI.jpeg",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/clinicddi",
+    "liveUrl": "https://clinic-ddi.vercel.app/",
     "featured": true,
-    "category": "Environmental",
-    "year": 2023
-  },
-  {
-    "id": "prepguide",
-    "title": "PrepGuide",
-    "description": "Your comprehensive guide to exam success. Prepare for JAMB, WAEC, and NECO with expertly curated resources and practice materials.",
-    "longDescription": "PrepGuide is a comprehensive exam preparation platform designed to help students excel in Nigerian entrance and certification exams. Features include interactive practice questions, personalized learning paths, performance analytics, and expert-guided content.",
-    "technologies": ["React", "Next.js", "TypeScript", "TailwindCSS", "Node.js"],
-    "imageUrl": "/prepguide.png",
-    "githubUrl": "",
-    "liveUrl": "https://www.prepguide.com.ng",
-    "featured": false,
-    "category": "Education",
-    "year": 2025
-  },
-  {
-    "id": "krad-apparel",
-    "title": "Krad Apparel",
-    "description": "Fashion design and tailoring brand with custom feature that converts prompts to client sketches or simulated garments.",
-    "longDescription": "Krad Apparel revolutionizes fashion design by combining traditional craftsmanship with AI capabilities. Customers can describe their desired garments, and the platform uses Groq's API to generate visual previews, streamlining the design-to-production workflow.",
-    "technologies": ["React", "Next.js", "TailwindCSS", "Groq API"],
-    "imageUrl": "/krad.png",
-    "githubUrl": "https://github.com/gbengaoluwadahunsi/krad-apparel",
-    "liveUrl": "https://krad-apparel.vercel.app/",
-    "featured": false,
-    "category": "Fashion/AI",
-    "year": 2023
-  },
-  {
-    "id": "astonish-designs",
-    "title": "Astonish Designs Fashion",
-    "description": "A fashion design web app showcasing different attires and styles to intending and current clients.",
-    "longDescription": "Astonish Designs is a comprehensive fashion portfolio platform that showcases diverse design collections, custom tailoring services, and style consultations. Integrated with AI-powered design suggestions through Hugging Face models.",
-    "technologies": ["React", "TailwindCSS", "Hugging Face API"],
-    "imageUrl": "/astonish.png",
-    "githubUrl": "https://github.com/gbengaoluwadahunsi/Astonish-Designs",
-    "liveUrl": "https://astonish-designs.com.ng/",
-    "featured": false,
-    "category": "Fashion",
-    "year": 2023
+    "category": "AI/Healthcare",
+    "year": 2024,
+    "metrics": {
+      "performance": "Real-time lookup",
+      "users": "Clinical practitioners",
+      "impact": "Patient safety & decision support"
+    }
   }
 ]

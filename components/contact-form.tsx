@@ -76,7 +76,7 @@ export function ContactForm() {
     <motion.form
       ref={formRef}
       onSubmit={handleSubmit(sendEmail)}
-      className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 md:p-8 space-y-6"
+      className="bg-card border rounded-2xl shadow-sm p-6 md:p-8 space-y-6"
       variants={staggerContainerVariants}
       initial="initial"
       animate="animate"
@@ -158,7 +158,7 @@ export function ContactForm() {
       <motion.div variants={fadeInUpVariants}>
         <Button
           type="submit"
-          className="w-full bg-gradient-to-r from-primary to-accent text-white hover:from-primary/90 hover:to-accent/90 dark:from-primary-dark dark:to-accent-dark dark:hover:from-primary-dark/90 dark:hover:to-accent-dark/90 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark"
+          className="w-full text-base font-semibold py-6 shadow-sm hover:shadow-primary/25 transition-all"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

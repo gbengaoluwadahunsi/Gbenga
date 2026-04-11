@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://gbengaoluwadahunsi.vercel.app'),
   title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare · Edge & Private AI)",
   description:
-    "Biochemistry-trained AI engineer and CTO at Novate AI (Antler-backed), building healthcare AI systems—from architecture to deployment—with a focus on privacy-preserving, decentralized, and edge AI.",
+    "Fullstack and AI Engineer and CTO at Novate AI, building healthcare AI systems—from architecture to deployment—with a focus on privacy-preserving, decentralized, and edge AI.",
   keywords: [
     "Gbenga Oluwadahunsi",
     "AI Engineer",
@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     "Private AI",
     "Decentralized AI",
     "Novate AI",
-    "Antler",
     "Full Stack Developer",
     "Software Engineer",
     "Next.js",
@@ -60,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare · Edge & Private AI)",
     description:
-      "CTO at Novate AI (Antler-backed). Biochemistry → AI architecture: intelligent systems for healthcare with a focus on privacy-preserving and edge deployment.",
+      "CTO at Novate AI. Fullstack and AI architecture: intelligent systems for healthcare with a focus on privacy-preserving and edge deployment.",
     url: "https://gbengaoluwadahunsi.vercel.app",
     siteName: "Gbenga Oluwadahunsi Portfolio",
     images: [
@@ -78,7 +77,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare AI)",
     description:
-      "Biochemistry-trained AI engineer. CTO at Novate AI. Healthcare, edge, and privacy-first intelligent systems.",
+      "Fullstack and AI Engineer. CTO at Novate AI. Healthcare, edge, and privacy-first intelligent systems.",
     images: ["/og-image.png"],
     creator: "@gbengaoluwadahunsi", // Add your Twitter handle if you have one
   },
@@ -97,24 +96,18 @@ export default function RootLayout({
     "@type": "Person",
     "name": "Gbenga Oluwadahunsi",
     "jobTitle": "AI Engineer & CTO",
-    "description": "AI engineer focused on healthcare: privacy-preserving, decentralized, and edge AI. CTO at Novate AI (Antler-backed).",
+    "description": "AI engineer focused on healthcare: privacy-preserving, decentralized, and edge AI. CTO at Novate AI.",
     "url": "https://gbengaoluwadahunsi.vercel.app",
     "sameAs": [
       "https://github.com/gbengaoluwadahunsi",
       "https://www.linkedin.com/in/gbengaoluwadahunsi/",
-      "https://www.novatescribe.com",
-      "https://catalystar.vercel.app/"
+      "https://www.novatescribe.com"
     ],
     "worksFor": [
       {
         "@type": "Organization",
-        "name": "NovateScribe",
+        "name": "Novate AI",
         "url": "https://www.novatescribe.com"
-      },
-      {
-        "@type": "Organization", 
-        "name": "Catalystar Environmental Services",
-        "url": "https://catalystar.vercel.app/"
       }
     ],
     "knowsAbout": [
@@ -133,7 +126,7 @@ export default function RootLayout({
     },
     "nationality": "Nigerian",
     "email": "contact@gbengaoluwadahunsi.com",
-    "image": "https://gbengaoluwadahunsi.vercel.app/photo2.png"
+    "image": "https://gbengaoluwadahunsi.vercel.app/two.png"
   }
 
   return (
