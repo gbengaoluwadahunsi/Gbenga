@@ -124,7 +124,7 @@ export default function HomePage() {
             <motion.div variants={fadeUp} className="relative aspect-[4/5] w-full max-w-md mx-auto lg:ml-auto">
               <div className="absolute inset-0 bg-secondary rounded-2xl overflow-hidden shadow-2xl ring-1 ring-border">
                 <Image
-                  src="/two.png"
+                  src="/hero.png"
                   alt="Portrait"
                   fill
                   priority
