@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://gbengaoluwadahunsi.vercel.app'),
   title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare · Edge & Private AI)",
   description:
-    "Fullstack and AI Engineer and CTO at Novate AI, building healthcare AI systems—from architecture to deployment—with a focus on privacy-preserving, decentralized, and edge AI.",
+    "Fullstack and AI Engineer building healthcare AI systems—from architecture to deployment—with a focus on privacy-preserving, decentralized, and edge AI.",
   keywords: [
     "Gbenga Oluwadahunsi",
     "AI Engineer",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare · Edge & Private AI)",
     description:
-      "CTO at Novate AI. Fullstack and AI architecture: intelligent systems for healthcare with a focus on privacy-preserving and edge deployment.",
+      "Fullstack and AI architecture: intelligent systems for healthcare with a focus on privacy-preserving and edge deployment.",
     url: "https://gbengaoluwadahunsi.vercel.app",
     siteName: "Gbenga Oluwadahunsi Portfolio",
     images: [
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare AI)",
     description:
-      "Fullstack and AI Engineer. CTO at Novate AI. Healthcare, edge, and privacy-first intelligent systems.",
+      "Fullstack and AI Engineer. Healthcare, edge, and privacy-first intelligent systems.",
     images: ["/og-image.png"],
     creator: "@gbengaoluwadahunsi", // Add your Twitter handle if you have one
   },
@@ -95,8 +95,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Gbenga Oluwadahunsi",
-    "jobTitle": "AI Engineer & CTO",
-    "description": "AI engineer focused on healthcare: privacy-preserving, decentralized, and edge AI. CTO at Novate AI.",
+    "jobTitle": "AI Engineer",
+    "description": "AI engineer focused on healthcare: privacy-preserving, decentralized, and edge AI.",
     "url": "https://gbengaoluwadahunsi.vercel.app",
     "sameAs": [
       "https://github.com/gbengaoluwadahunsi",

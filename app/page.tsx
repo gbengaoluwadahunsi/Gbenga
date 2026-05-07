@@ -106,7 +106,7 @@ export default function HomePage() {
                 Gbenga <br className="hidden md:block" /> Oluwadahunsi
               </motion.h1>
               <motion.p variants={fadeUp} className="max-w-xl text-lg md:text-xl text-muted-foreground font-medium leading-relaxed">
-                Fullstack and AI Engineer. CTO at Novate AI. I build high-performance, privacy-first healthcare AI systems from the infrastructure up.
+                Fullstack and AI Engineer. I build high-performance, privacy-first healthcare AI systems from the infrastructure up.
               </motion.p>
 
               <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -193,9 +193,9 @@ export default function HomePage() {
                   {
                     role: "CTO, AI & Software Engineer",
                     org: "Novate AI",
-                    time: "May 2025 - Present",
+                    time: "May 2025 - May 2026",
                     body: "Founding engineer & CTO for a healthtech company — product, platform, and compliance-aware AI for clinical workflows. Defined technical roadmap, shipped HIPAA-aware architecture, built ML pipelines for medical datasets.",
-                    current: true
+                    current: false
                   },
                   {
                     role: "AI Product Engineer",
