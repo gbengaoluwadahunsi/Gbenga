@@ -64,6 +64,15 @@ export default function HomePage() {
             ))}
           </nav>
           <div className="flex items-center gap-4">
+            <Link
+              href="https://github.com/gbengaoluwadahunsi"
+              target="_blank"
+              aria-label="GitHub Profile"
+              className="hidden md:flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors border rounded-full px-3 py-1.5 hover:border-foreground/30"
+            >
+              <Github className="h-4 w-4" />
+              <span>GitHub</span>
+            </Link>
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden text-muted-foreground">
@@ -82,6 +91,14 @@ export default function HomePage() {
                       </Link>
                     </SheetClose>
                   ))}
+                  <Link
+                    href="https://github.com/gbengaoluwadahunsi"
+                    target="_blank"
+                    className="flex items-center gap-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <Github className="h-4 w-4" />
+                    GitHub
+                  </Link>
                 </div>
               </SheetContent>
             </Sheet>
@@ -118,6 +135,19 @@ export default function HomePage() {
                     <Download className="mr-2 h-5 w-5" /> Download Resume
                   </Link>
                 </Button>
+              </motion.div>
+              <motion.div variants={fadeUp} className="flex items-center gap-3 pt-2">
+                <Link
+                  href="https://github.com/gbengaoluwadahunsi"
+                  target="_blank"
+                  className="group flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <span className="flex items-center justify-center h-9 w-9 rounded-full border border-border group-hover:border-foreground/40 group-hover:bg-secondary transition-all">
+                    <Github className="h-4 w-4" />
+                  </span>
+                  <span>github.com/gbengaoluwadahunsi</span>
+                  <ArrowRight className="h-3.5 w-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                </Link>
               </motion.div>
             </div>
 
