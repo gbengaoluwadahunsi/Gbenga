@@ -1,5 +1,33 @@
 [
   {
+    "id": "learnaos",
+    "title": "LearnaOS",
+    "description": "Turn any GitHub repo into a book-style course with one CLI command. Curated library with subscriptions, Clerk auth, and Stripe billing.",
+    "longDescription": "LearnaOS converts GitHub repositories into structured, book-style learning experiences. Run `npx learnaos@latest owner/repo` on any repo or local folder to generate static HTML courses from markdown, Jupyter notebooks, and source files. The hosted platform at learnaos.com offers a curated course library with free previews, Starter subscriptions ($9/mo) for full access, and Pro plans with AI tutor, voice narration, and quizzes.",
+    "technologies": ["Next.js", "TypeScript", "React", "Clerk", "Stripe", "Neon PostgreSQL", "Drizzle ORM", "TailwindCSS", "Framer Motion", "AWS S3", "Vercel"],
+    "imageUrl": "/learnaos.svg",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/LearnaOS-app",
+    "liveUrl": "https://www.learnaos.com",
+    "featured": true,
+    "category": "EdTech",
+    "year": 2026,
+    "metrics": {
+      "performance": "Static HTML course exports",
+      "users": "Developers & learners",
+      "impact": "GitHub-to-course pipeline"
+    },
+    "challenges": [
+      "Converting heterogeneous repo structures into readable chapter hierarchies",
+      "Rendering Jupyter notebooks and multi-format source files consistently",
+      "Building subscription access with preview limits and paid tiers"
+    ],
+    "solutions": [
+      "Built an open-source CLI that auto-detects repo layout with zero config",
+      "Implemented notebook and code file renderers for book-style reading",
+      "Integrated Clerk auth, Stripe billing, and Neon DB for the hosted library"
+    ]
+  },
+  {
     "id": "novate-scribe",
     "title": "AI-Powered Notes for Medical Practitioners",
     "description": "A web application that allows medical practitioners to take notes, generate summaries, and extract key information using AI.",

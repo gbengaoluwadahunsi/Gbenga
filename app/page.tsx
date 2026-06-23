@@ -285,6 +285,12 @@ export default function HomePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {[
                   {
+                    title: "LearnaOS",
+                    desc: "Turn any GitHub repo into a book-style course with one CLI command. Hosted library with curated courses, Clerk auth, Stripe subscriptions, and Pro AI learning tools.",
+                    img: "/learnaos.svg",
+                    link: "https://www.learnaos.com"
+                  },
+                  {
                     title: "NovateScribe",
                     desc: "AI-Powered Notes for Medical Practitioners. Production healthcare AI with 99.9% uptime. Built with Next.js, Node.js, and HIPAA-aware ML pipelines.",
                     img: "/novateScribe.jpeg",
