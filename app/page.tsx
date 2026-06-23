@@ -291,6 +291,12 @@ export default function HomePage() {
                     link: "https://www.learnaos.com"
                   },
                   {
+                    title: "Prezzence",
+                    desc: "AI-powered Android interview prep app. Practice with a real-time AI avatar, on-device whisper.cpp transcription, and MediaPipe camera presence coaching.",
+                    img: "/prezzence.jpeg",
+                    link: "https://www.prezzence.app"
+                  },
+                  {
                     title: "NovateScribe",
                     desc: "AI-Powered Notes for Medical Practitioners. Production healthcare AI with 99.9% uptime. Built with Next.js, Node.js, and HIPAA-aware ML pipelines.",
                     img: "/novateScribe.jpeg",

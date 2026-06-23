@@ -28,6 +28,34 @@
     ]
   },
   {
+    "id": "prezzence",
+    "title": "Prezzence",
+    "description": "AI-powered interview preparation app for Android. Practice with a real-time AI avatar interviewer, on-device transcription, and camera presence coaching.",
+    "longDescription": "Prezzence is a native Android app that helps users prepare for job interviews through AI-driven mock interview sessions. A Duix AI avatar asks questions, on-device whisper.cpp transcribes answers, and a MediaPipe camera coach scores eye contact, posture, and expression energy in real time. Sessions are scored, saved to history, and synced with a FastAPI/Supabase backend. Supports Google Play subscriptions, multilingual interviews, resume profile upload, and a full account management flow.",
+    "technologies": ["Kotlin", "Android", "Jetpack Compose", "FastAPI", "Python", "Supabase", "whisper.cpp", "MediaPipe", "CameraX", "Duix SDK", "Google Play Billing", "Neon PostgreSQL"],
+    "imageUrl": "/prezzence.jpeg",
+    "githubUrl": "https://github.com/gbengaoluwadahunsi/Prezzence",
+    "liveUrl": "https://www.prezzence.app",
+    "featured": true,
+    "category": "AI/Mobile",
+    "year": 2026,
+    "metrics": {
+      "performance": "On-device whisper.cpp transcription",
+      "users": "Android job seekers",
+      "impact": "Real-time interview coaching"
+    },
+    "challenges": [
+      "Integrating on-device whisper.cpp JNI alongside a live Duix avatar",
+      "Running MediaPipe face/pose scoring and CameraX concurrently without frame drops",
+      "Building a robust Play Billing subscription flow with server-side verification"
+    ],
+    "solutions": [
+      "Built a standalone prezzence_whisper JNI library from whisper.cpp/ggml sources",
+      "Routed MediaPipe analysis to a background dispatcher to keep the UI thread free",
+      "Implemented backend Google Play receipt verification with FastAPI and Neon PostgreSQL"
+    ]
+  },
+  {
     "id": "novate-scribe",
     "title": "AI-Powered Notes for Medical Practitioners",
     "description": "A web application that allows medical practitioners to take notes, generate summaries, and extract key information using AI.",
