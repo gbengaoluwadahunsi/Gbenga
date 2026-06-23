@@ -287,7 +287,7 @@ export default function HomePage() {
                   {
                     title: "LearnaOS",
                     desc: "Turn any GitHub repo into a book-style course with one CLI command. Hosted library with curated courses, Clerk auth, Stripe subscriptions, and Pro AI learning tools.",
-                    img: "/learnaos.svg",
+                    img: "/learnaos.jpeg",
                     link: "https://www.learnaos.com"
                   },
                   {
