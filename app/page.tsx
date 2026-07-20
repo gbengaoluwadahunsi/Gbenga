@@ -408,7 +408,7 @@ export default function HomePage() {
                   <motion.div key={prod.title} variants={fadeUp} className="group relative overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
                     <Link href={prod.link} target="_blank" className="flex h-full flex-col">
                       <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary">
-                        <Image src={prod.img} alt={prod.title} fill className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
+                        <Image src={prod.img} alt={prod.title} fill className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]" />
                         <span className="eyebrow absolute left-4 top-4 rounded-full border border-primary/30 bg-background/80 px-2.5 py-1 text-[10px] font-semibold text-primary backdrop-blur">
                           Featured
                         </span>
@@ -436,7 +436,7 @@ export default function HomePage() {
                   <motion.div key={prod.title} variants={fadeUp} className="group relative overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                     <Link href={prod.link} target="_blank" className="flex h-full flex-col">
                       <div className="relative aspect-video w-full overflow-hidden bg-secondary">
-                        <Image src={prod.img} alt={prod.title} fill className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]" />
+                        <Image src={prod.img} alt={prod.title} fill className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]" />
                       </div>
                       <div className="flex flex-1 flex-col p-5">
                         <div className="mb-2 flex items-center justify-between">
