@@ -1,13 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ArrowRight, ArrowUpRight, Download, Github, Linkedin, Mail, Menu, Code2, Zap, Users, TrendingUp, CheckCircle2 } from "lucide-react"
+import { ArrowUpRight, Download, Github, Linkedin, Mail, Menu, Code2, Zap, TrendingUp, CheckCircle2 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ContactForm } from "@/components/contact-form"
-import logo from "@/public/O.png"
 import { ThemeSwitcher } from "@/components/theme-switcher"
 import {
   Sheet,
@@ -19,21 +18,19 @@ import {
 } from "@/components/ui/sheet"
 
 const fadeUp = {
-  initial: { opacity: 0, y: 18 },
+  initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+  transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
 }
 
 const stagger = {
-  animate: {
-    transition: { staggerChildren: 0.06 }
-  }
+  animate: { transition: { staggerChildren: 0.08 } }
 }
 
 const NAV_LINKS = [
   { href: "#skills", label: "Capabilities", num: "01" },
   { href: "#experience", label: "Experience", num: "02" },
-  { href: "#projects", label: "Products", num: "03" },
+  { href: "#projects", label: "Work", num: "03" },
   { href: "#contact", label: "Contact", num: "04" },
 ]
 
@@ -45,152 +42,80 @@ const CAPABILITIES = [
 ]
 
 const EXPERIENCE = [
-  {
-    role: "CTO, AI & Software Engineer",
-    org: "Novate AI",
-    time: "2025 — 2026",
-    body: "Founding engineer & CTO — owned product, platform, and compliance-aware AI end to end. Defined the technical roadmap, shipped secure architecture, and built production ML pipelines for sensitive data at scale.",
-    current: true,
-  },
-  {
-    role: "AI Product Engineer",
-    org: "Automancers PTE Ltd",
-    time: "2024 — 2025",
-    body: "Designed reusable component library and optimized database performance resulting in 30% reduction in development time and 30% improvement in backend response times.",
-    current: false,
-  },
-  {
-    role: "FullStack Engineer",
-    org: "Pollecode",
-    time: "2022 — 2024",
-    body: "Rebuilt core app architecture across client and data access layers. Integrated 5+ third-party payment/auth systems. Led weekly code reviews across the API and components.",
-    current: false,
-  },
-  {
-    role: "Frontend Developer",
-    org: "100Devs",
-    time: "2021 — 2022",
-    body: "Delivered 4 client projects within tight timelines. Shipped pixel-accurate responsive interfaces and introduced PR review processes that significantly cut regressions.",
-    current: false,
-  },
+  { role: "CTO, AI & Software Engineer", org: "Novate AI", time: "2025 — 2026", body: "Founding engineer & CTO — owned product, platform, and compliance-aware AI end to end. Defined the technical roadmap, shipped secure architecture, and built production ML pipelines for sensitive data at scale.", current: true },
+  { role: "AI Product Engineer", org: "Automancers PTE Ltd", time: "2024 — 2025", body: "Designed reusable component library and optimized database performance resulting in 30% reduction in development time and 30% improvement in backend response times.", current: false },
+  { role: "FullStack Engineer", org: "Pollecode", time: "2022 — 2024", body: "Rebuilt core app architecture across client and data access layers. Integrated 5+ third-party payment/auth systems. Led weekly code reviews across the API and components.", current: false },
+  { role: "Frontend Developer", org: "100Devs", time: "2021 — 2022", body: "Delivered 4 client projects within tight timelines. Shipped pixel-accurate responsive interfaces and introduced PR review processes that significantly cut regressions.", current: false },
 ]
 
 const PROJECTS = [
-  {
-    title: "LearnaOS",
-    desc: "Turn any GitHub repo into a book-style course with one CLI command. Hosted library with curated courses, Clerk auth, Stripe subscriptions, and Pro AI learning tools.",
-    img: "/learnaos.jpeg",
-    link: "https://www.learnaos.com",
-    tags: ["Next.js", "Stripe", "Clerk", "AI"],
-    featured: true,
-  },
-  {
-    title: "Prezzence",
-    desc: "AI-powered Android interview prep app. Practice with a real-time AI avatar, on-device whisper.cpp transcription, and MediaPipe camera presence coaching.",
-    img: "/prezzence.jpeg",
-    link: "https://www.prezzence.app",
-    tags: ["Kotlin", "whisper.cpp", "MediaPipe", "FastAPI"],
-    featured: true,
-  },
-  {
-    title: "NovateScribe",
-    desc: "AI-Powered Notes for Medical Practitioners. Production healthcare AI with 99.9% uptime. Built with Next.js, Node.js, and HIPAA-aware ML pipelines.",
-    img: "/novateScribe.jpeg",
-    link: "https://www.novatescribe.com",
-    tags: ["Healthcare AI", "RAG", "HIPAA", "AWS"],
-    featured: false,
-  },
-  {
-    title: "ClinicDDI",
-    desc: "An advanced Drug-Drug Interaction (DDI) checker equipped with AI to protect clinical decision-making. Built for accuracy in clinical environments.",
-    img: "/clinicDDI.jpeg",
-    link: "https://clinic-ddi.vercel.app/",
-    tags: ["Clinical AI", "Next.js", "Python"],
-    featured: false,
-  },
-  {
-    title: "Carouslk",
-    desc: "A powerful carousel creation tool that enables users to build beautiful, responsive carousels for images and videos. Features drag-and-drop reordering.",
-    img: "/carouslk.jpeg",
-    link: "https://www.carouslk.com/",
-    tags: ["Canvas API", "Dnd-kit", "Framer Motion"],
-    featured: false,
-  },
-  {
-    title: "Audire",
-    desc: "An open-source, AI-powered digital library featuring podcast-quality Edge neural TTS, browser OCR for scanned PDFs, and LLM-enhanced reading comprehension.",
-    img: "/audire.jpeg",
-    link: "https://audire-roan.vercel.app/",
-    tags: ["Neural TTS", "OCR", "LLM"],
-    featured: false,
-  },
-  {
-    title: "4casta",
-    desc: "A premium, local-first business forecasting platform for enterprise branch management. Integrates a Voice-First AI assistant (Kokoro TTS) and edge analytics.",
-    img: "/4casta.jpeg",
-    link: "https://4casta.vercel.app",
-    tags: ["Local-first", "Kokoro TTS", "Edge"],
-    featured: false,
-  },
-  {
-    title: "Document Merger",
-    desc: "Browser-based, privacy-first PDF/Word document merging utility handling sub-100ms operations solely via client-side File APIs.",
-    img: "/docmerger.png",
-    link: "https://document-merger-ebon.vercel.app/",
-    tags: ["Privacy-first", "PDF-lib", "File API"],
-    featured: false,
-  },
+  { title: "LearnaOS", desc: "Turn any GitHub repo into a book-style course with one CLI command. Hosted library with curated courses, Clerk auth, Stripe subscriptions, and Pro AI learning tools.", img: "/learnaos.jpeg", link: "https://www.learnaos.com", tags: ["Next.js", "Stripe", "Clerk", "AI"], featured: true },
+  { title: "Prezzence", desc: "AI-powered Android interview prep app. Practice with a real-time AI avatar, on-device whisper.cpp transcription, and MediaPipe camera presence coaching.", img: "/prezzence.jpeg", link: "https://www.prezzence.app", tags: ["Kotlin", "whisper.cpp", "MediaPipe", "FastAPI"], featured: true },
+  { title: "NovateScribe", desc: "AI-Powered Notes for Medical Practitioners. Production healthcare AI with 99.9% uptime. Built with Next.js, Node.js, and HIPAA-aware ML pipelines.", img: "/novateScribe.jpeg", link: "https://www.novatescribe.com", tags: ["Healthcare AI", "RAG", "HIPAA", "AWS"], featured: false },
+  { title: "ClinicDDI", desc: "An advanced Drug-Drug Interaction (DDI) checker equipped with AI to protect clinical decision-making. Built for accuracy in clinical environments.", img: "/clinicDDI.jpeg", link: "https://clinic-ddi.vercel.app/", tags: ["Clinical AI", "Next.js", "Python"], featured: false },
+  { title: "Carouslk", desc: "A powerful carousel creation tool that enables users to build beautiful, responsive carousels for images and videos. Features drag-and-drop reordering.", img: "/carouslk.jpeg", link: "https://www.carouslk.com/", tags: ["Canvas API", "Dnd-kit", "Framer Motion"], featured: false },
+  { title: "Audire", desc: "An open-source, AI-powered digital library featuring podcast-quality Edge neural TTS, browser OCR for scanned PDFs, and LLM-enhanced reading comprehension.", img: "/audire.jpeg", link: "https://audire-roan.vercel.app/", tags: ["Neural TTS", "OCR", "LLM"], featured: false },
+  { title: "4casta", desc: "A premium, local-first business forecasting platform for enterprise branch management. Integrates a Voice-First AI assistant (Kokoro TTS) and edge analytics.", img: "/4casta.jpeg", link: "https://4casta.vercel.app", tags: ["Local-first", "Kokoro TTS", "Edge"], featured: false },
+  { title: "Document Merger", desc: "Browser-based, privacy-first PDF/Word document merging utility handling sub-100ms operations solely via client-side File APIs.", img: "/docmerger.png", link: "https://document-merger-ebon.vercel.app/", tags: ["Privacy-first", "PDF-lib", "File API"], featured: false },
 ]
 
-function SectionLabel({ num, children }: { num: string; children: React.ReactNode }) {
+/* Decorative editorial bracket marks around the wordmark, echoing the reference */
+function BracketMarks() {
   return (
-    <div className="flex items-center gap-3">
-      <span className="eyebrow text-xs font-semibold text-primary">{num}</span>
-      <span className="h-px w-8 bg-primary/40" />
-      <span className="eyebrow text-xs font-semibold text-muted-foreground">{children}</span>
+    <div aria-hidden className="pointer-events-none absolute inset-0 text-primary/70">
+      {/* corners */}
+      <span className="absolute -left-6 -top-6 font-mono text-2xl md:-left-10 md:-top-8 md:text-3xl">⌐</span>
+      <span className="absolute -right-6 -top-6 rotate-90 font-mono text-2xl md:-right-10 md:-top-8 md:text-3xl">⌐</span>
+      <span className="absolute -bottom-6 -left-6 -rotate-90 font-mono text-2xl md:-bottom-8 md:-left-10 md:text-3xl">⌐</span>
+      <span className="absolute -bottom-6 -right-6 rotate-180 font-mono text-2xl md:-bottom-8 md:-right-10 md:text-3xl">⌐</span>
+      {/* ticks + square accents */}
+      <span className="absolute -left-4 top-1/2 hidden -translate-y-1/2 font-mono text-lg text-foreground/40 md:block">│</span>
+      <span className="absolute -right-4 top-1/2 hidden -translate-y-1/2 font-mono text-lg text-foreground/40 md:block">│</span>
+      <span className="absolute -top-7 left-1/3 hidden h-1.5 w-1.5 bg-primary/70 md:block" />
+      <span className="absolute -bottom-7 right-1/3 hidden h-1.5 w-1.5 bg-foreground/30 md:block" />
+    </div>
+  )
+}
+
+function SectionHead({ num, kicker, title }: { num: string; kicker: string; title: string }) {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        <span className="eyebrow text-[10px] text-primary">{num}</span>
+        <span className="h-px w-12 bg-border" />
+        <span className="eyebrow text-[10px] text-muted-foreground">{kicker}</span>
+      </div>
+      <h2 className="display text-4xl font-medium tracking-tight text-foreground md:text-6xl">{title}</h2>
     </div>
   )
 }
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
+  useEffect(() => { setMounted(true) }, [])
   if (!mounted) return null
 
   const featured = PROJECTS.filter((p) => p.featured)
   const rest = PROJECTS.filter((p) => !p.featured)
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground font-sans selection:bg-primary/25 selection:text-foreground">
+    <div className="flex min-h-screen flex-col bg-background text-foreground font-sans selection:bg-primary/25">
       {/* Navigation */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/70 backdrop-blur-xl">
-        <div className="container flex h-16 items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src={logo} alt="Logo" width={36} height={36} className="dark:invert dark:brightness-0" />
-            <span className="eyebrow hidden text-xs font-semibold text-muted-foreground sm:inline">Gbenga.O</span>
+      <header className="fixed top-0 z-50 w-full">
+        <div className="container flex h-20 items-center justify-between px-6">
+          <Link href="/" className="eyebrow text-xs font-medium tracking-editorial text-foreground">
+            GBENGA<span className="text-primary">.O</span>
           </Link>
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-10 md:flex">
             {NAV_LINKS.map(({ href, label, num }) => (
-              <Link key={href} href={href} className="group flex items-baseline gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
-                <span className="eyebrow text-[10px] text-primary/70">{num}</span>
-                {label}
+              <Link key={href} href={href} className="group flex items-baseline gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
+                <span className="eyebrow text-[9px] text-primary/60">{num}</span>
+                <span className="tracking-wide">{label}</span>
               </Link>
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <Link
-              href="https://github.com/gbengaoluwadahunsi"
-              target="_blank"
-              aria-label="GitHub Profile"
-              className="hidden items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm font-medium text-muted-foreground transition-all hover:border-primary/40 hover:text-foreground md:flex"
-            >
-              <Github className="h-4 w-4" />
-              <span>GitHub</span>
-            </Link>
+            <ThemeSwitcher />
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="text-muted-foreground md:hidden">
@@ -199,160 +124,104 @@ export default function HomePage() {
               </SheetTrigger>
               <SheetContent side="right" className="border-l bg-background">
                 <SheetHeader>
-                  <SheetTitle className="eyebrow text-left text-xs text-muted-foreground">Navigation</SheetTitle>
+                  <SheetTitle className="eyebrow text-left text-[10px] text-muted-foreground">Index</SheetTitle>
                 </SheetHeader>
-                <div className="mt-8 flex flex-col gap-5">
+                <div className="mt-10 flex flex-col gap-6">
                   {NAV_LINKS.map(({ href, label, num }) => (
                     <SheetClose key={href} asChild>
-                      <Link href={href} className="flex items-baseline gap-3 text-lg font-semibold text-foreground transition-colors hover:text-primary">
-                        <span className="eyebrow text-xs text-primary/70">{num}</span>
+                      <Link href={href} className="flex items-baseline gap-3 text-2xl text-foreground transition-colors hover:text-primary display">
+                        <span className="eyebrow text-[10px] text-primary/70">{num}</span>
                         {label}
                       </Link>
                     </SheetClose>
                   ))}
-                  <Link
-                    href="https://github.com/gbengaoluwadahunsi"
-                    target="_blank"
-                    className="mt-2 flex items-center gap-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Github className="h-4 w-4" />
-                    GitHub
-                  </Link>
                 </div>
               </SheetContent>
             </Sheet>
-            <ThemeSwitcher />
           </div>
         </div>
       </header>
 
       <main className="flex-1">
-        {/* Hero */}
-        <section className="relative overflow-hidden border-b border-border/60">
-          {/* Blueprint grid + emerald glow backdrop */}
-          <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid mask-fade opacity-70" />
-          <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-primary/20 blur-[130px]" />
+        {/* Hero — atmospheric bracket-framed wordmark */}
+        <section className="grain relative flex min-h-screen items-center overflow-hidden bg-atmosphere">
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid opacity-[0.04]" />
 
-          <div className="container relative px-6 pt-20 pb-24 md:pt-28 md:pb-32">
-            <motion.div
-              initial="initial" animate="animate" variants={stagger}
-              className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20"
-            >
-              <div className="space-y-8">
-                <motion.div variants={fadeUp}>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3.5 py-1.5">
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-                    </span>
-                    <span className="eyebrow text-[11px] font-semibold text-primary">Engineering Leader · Available</span>
-                  </span>
-                </motion.div>
+          <div className="container relative z-[2] px-6 py-32">
+            <motion.div initial="initial" animate="animate" variants={stagger} className="flex flex-col items-center text-center">
+              <motion.div variants={fadeUp} className="mb-14 flex items-center gap-4">
+                <span className="eyebrow text-[10px] text-foreground/60">Fullstack · AI Engineer</span>
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+                </span>
+                <span className="eyebrow text-[10px] text-foreground/60">Available 2026</span>
+              </motion.div>
 
-                <motion.h1 variants={fadeUp} className="text-5xl font-bold leading-[1.02] tracking-tight text-foreground md:text-7xl">
-                  Gbenga <br className="hidden md:block" />
-                  <span className="text-gradient">Oluwadahunsi</span>
-                </motion.h1>
+              <motion.div variants={fadeUp} className="relative px-8 py-4 md:px-14">
+                <BracketMarks />
+                <h1 className="display text-[13vw] font-medium leading-[0.92] tracking-tight text-foreground sm:text-7xl md:text-8xl lg:text-[7.5rem]">
+                  Gbenga
+                  <br />
+                  <span className="text-primary/90">Oluwadahunsi</span>
+                </h1>
+              </motion.div>
 
-                <motion.p variants={fadeUp} className="max-w-xl text-lg font-medium leading-relaxed text-muted-foreground md:text-xl">
-                  Fullstack &amp; AI Engineer. I build high-performance,
-                  <span className="text-foreground"> privacy-first AI products</span> from the infrastructure up — across web, mobile, and edge.
-                </motion.p>
+              <motion.p variants={fadeUp} className="mt-14 max-w-md text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
+                Privacy-first, high-performance products — engineered from the infrastructure up, across web, mobile, and edge.
+              </motion.p>
 
-                <motion.div variants={fadeUp} className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
-                  <Button asChild size="lg" className="group px-7 py-6 text-base font-semibold shadow-lg shadow-primary/20 transition-all hover:shadow-primary/30">
-                    <Link href="#projects">
-                      Explore Products
-                      <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg" className="px-7 py-6 text-base font-semibold">
-                    <Link href="/Gbenga_Oluwadahunsi.pdf" target="_blank">
-                      <Download className="mr-2 h-5 w-5" /> Resume
-                    </Link>
-                  </Button>
-                </motion.div>
-
-                <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-4">
-                  <Link
-                    href="https://github.com/gbengaoluwadahunsi"
-                    target="_blank"
-                    className="eyebrow group flex items-center gap-2 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Github className="h-4 w-4" />
-                    github.com/gbengaoluwadahunsi
-                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
+              <motion.div variants={fadeUp} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+                <Button asChild size="lg" variant="outline" className="rounded-full border-foreground/30 px-8 py-6 text-sm tracking-wide hover:border-primary hover:bg-primary/5">
+                  <Link href="#projects">Explore the work</Link>
+                </Button>
+                <Button asChild size="lg" variant="ghost" className="rounded-full px-8 py-6 text-sm tracking-wide text-muted-foreground hover:text-foreground">
+                  <Link href="/Gbenga_Oluwadahunsi.pdf" target="_blank">
+                    <Download className="mr-2 h-4 w-4" /> Download résumé
                   </Link>
-                  <Link
-                    href="https://www.linkedin.com/in/gbengaoluwadahunsi/"
-                    target="_blank"
-                    className="eyebrow group flex items-center gap-2 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Linkedin className="h-4 w-4" />
-                    LinkedIn
-                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
-                  </Link>
-                </motion.div>
-              </div>
-
-              {/* Portrait + stat rail */}
-              <motion.div variants={fadeUp} className="relative mx-auto w-full max-w-md lg:ml-auto">
-                <div className="relative aspect-[4/5] w-full">
-                  {/* accent frame */}
-                  <div aria-hidden className="absolute -inset-3 rounded-[1.75rem] border border-primary/20" />
-                  <div className="absolute inset-0 overflow-hidden rounded-2xl bg-secondary shadow-2xl ring-1 ring-border">
-                    <Image src="/hero.png" alt="Gbenga Oluwadahunsi" fill priority className="object-cover" />
-                    <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-                  </div>
-
-                  {/* stat card */}
-                  <div className="absolute -bottom-6 -left-6 z-10 w-60 rounded-xl border bg-card/90 p-5 shadow-xl backdrop-blur-md">
-                    <div className="grid grid-cols-2 divide-x divide-border">
-                      <div className="pr-4">
-                        <p className="text-3xl font-bold text-foreground">4<span className="text-primary">+</span></p>
-                        <p className="eyebrow mt-1 text-[10px] text-muted-foreground">Yrs Shipping AI</p>
-                      </div>
-                      <div className="pl-4">
-                        <p className="text-3xl font-bold text-foreground">8</p>
-                        <p className="eyebrow mt-1 text-[10px] text-muted-foreground">Products Live</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </Button>
               </motion.div>
             </motion.div>
           </div>
+
+          {/* corner meta, editorial style */}
+          <div className="absolute bottom-8 left-0 right-0 z-[2] hidden md:block">
+            <div className="container flex items-end justify-between px-6">
+              <div className="flex items-center gap-3">
+                <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" className="eyebrow flex items-center gap-2 text-[10px] text-muted-foreground transition-colors hover:text-foreground">
+                  <Github className="h-3.5 w-3.5" /> GitHub
+                </Link>
+                <span className="h-3 w-px bg-border" />
+                <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" className="eyebrow flex items-center gap-2 text-[10px] text-muted-foreground transition-colors hover:text-foreground">
+                  <Linkedin className="h-3.5 w-3.5" /> LinkedIn
+                </Link>
+              </div>
+              <span className="eyebrow text-[10px] text-muted-foreground">Scroll to decode ↓</span>
+            </div>
+          </div>
         </section>
 
-        {/* Capabilities */}
-        <section id="skills" className="border-b border-border/60 bg-secondary/20">
-          <div className="container px-6 py-24 md:py-32">
+        {/* Capabilities — editorial index */}
+        <section id="skills" className="border-t border-border bg-background">
+          <div className="container px-6 py-28 md:py-36">
             <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-              <motion.div variants={fadeUp} className="mb-14 max-w-2xl space-y-5">
-                <SectionLabel num="01">Capabilities</SectionLabel>
-                <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-                  Engineered for production scale
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  Absolute performance, security, and scalability — from the browser down to the inference layer.
-                </p>
+              <motion.div variants={fadeUp} className="mb-16 max-w-3xl">
+                <SectionHead num="01" kicker="Capabilities" title="Engineered for production scale." />
               </motion.div>
 
-              <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-2 lg:grid-cols-4">
+              <div className="border-t border-border">
                 {CAPABILITIES.map((item, i) => (
                   <motion.div
                     key={i}
                     variants={fadeUp}
-                    className="group relative bg-card p-8 transition-colors hover:bg-secondary/40"
+                    className="group grid grid-cols-1 items-start gap-6 border-b border-border py-8 transition-colors hover:bg-secondary/30 md:grid-cols-[auto_1fr_2fr] md:gap-12 md:px-4"
                   >
-                    <span className="eyebrow absolute right-5 top-5 text-[10px] text-muted-foreground/50">
-                      0{i + 1}
-                    </span>
-                    <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20 transition-transform group-hover:scale-105">
-                      <item.icon className="h-6 w-6 text-primary" />
+                    <div className="flex items-center gap-4">
+                      <span className="eyebrow text-[10px] text-muted-foreground">0{i + 1}</span>
+                      <item.icon className="h-5 w-5 text-primary transition-transform group-hover:scale-110" />
                     </div>
-                    <h3 className="mb-2 text-lg font-bold text-foreground">{item.title}</h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+                    <h3 className="display text-2xl font-medium text-foreground md:text-3xl">{item.title}</h3>
+                    <p className="text-base leading-relaxed text-muted-foreground">{item.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -360,25 +229,26 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Experience */}
-        <section id="experience" className="border-b border-border/60 bg-background">
-          <div className="container px-6 py-24 md:py-32">
+        {/* Experience — editorial ledger */}
+        <section id="experience" className="grain relative overflow-hidden border-t border-border bg-atmosphere">
+          <div className="container relative z-[2] px-6 py-28 md:py-36">
             <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger} className="mx-auto max-w-4xl">
-              <motion.div variants={fadeUp} className="mb-14 space-y-5">
-                <SectionLabel num="02">Experience</SectionLabel>
-                <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">Professional trajectory</h2>
+              <motion.div variants={fadeUp} className="mb-16">
+                <SectionHead num="02" kicker="Experience" title="A trajectory, decoded." />
               </motion.div>
 
-              <div className="relative space-y-10 border-l border-border pl-8 md:pl-12">
+              <div className="border-t border-border/70">
                 {EXPERIENCE.map((job, i) => (
-                  <motion.div key={i} variants={fadeUp} className="group relative">
-                    <div className={`absolute top-1.5 h-3.5 w-3.5 rounded-full border-4 border-background ring-1 -left-[38px] md:-left-[54px] ${job.current ? "bg-primary ring-primary/40" : "bg-muted-foreground ring-transparent"}`} />
-                    <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-baseline md:gap-4">
-                      <h3 className="text-xl font-bold text-foreground md:text-2xl">{job.role}</h3>
-                      <span className="text-sm font-semibold text-primary">{job.org}</span>
-                      <span className="eyebrow text-[11px] text-muted-foreground md:ml-auto">{job.time}</span>
+                  <motion.div key={i} variants={fadeUp} className="grid grid-cols-1 gap-4 border-b border-border/70 py-8 md:grid-cols-[1fr_2fr] md:gap-12">
+                    <div>
+                      <div className="mb-1 flex items-center gap-2">
+                        {job.current && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
+                        <span className="eyebrow text-[10px] text-muted-foreground">{job.time}</span>
+                      </div>
+                      <h3 className="display text-2xl font-medium text-foreground">{job.role}</h3>
+                      <p className="mt-1 text-sm text-primary">{job.org}</p>
                     </div>
-                    <p className="max-w-2xl leading-relaxed text-muted-foreground">{job.body}</p>
+                    <p className="text-base leading-relaxed text-muted-foreground md:pt-1">{job.body}</p>
                   </motion.div>
                 ))}
               </div>
@@ -386,69 +256,60 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Projects */}
-        <section id="projects" className="border-b border-border/60 bg-secondary/20">
-          <div className="container px-6 py-24 md:py-32">
+        {/* Work — editorial gallery */}
+        <section id="projects" className="border-t border-border bg-background">
+          <div className="container px-6 py-28 md:py-36">
             <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
-              <motion.div variants={fadeUp} className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-                <div className="max-w-2xl space-y-5">
-                  <SectionLabel num="03">Products</SectionLabel>
-                  <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">Engineered for humans. Deployed for scale.</h2>
-                </div>
-                <Button asChild variant="outline">
-                  <Link href="https://github.com/gbengaoluwadahunsi" target="_blank">
-                    <Github className="mr-2 h-4 w-4" /> View GitHub
-                  </Link>
-                </Button>
+              <motion.div variants={fadeUp} className="mb-16 flex flex-col justify-between gap-8 md:flex-row md:items-end">
+                <SectionHead num="03" kicker="Selected Work" title="Shipped, at scale." />
+                <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" className="eyebrow flex items-center gap-2 text-[10px] text-muted-foreground transition-colors hover:text-foreground">
+                  All repositories <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
               </motion.div>
 
-              {/* Featured — large */}
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                {featured.map((prod, i) => (
-                  <motion.div key={prod.title} variants={fadeUp} className="group relative overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
-                    <Link href={prod.link} target="_blank" className="flex h-full flex-col">
-                      <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary">
-                        <Image src={prod.img} alt={prod.title} fill className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]" />
-                        <span className="eyebrow absolute left-4 top-4 rounded-full border border-primary/30 bg-background/80 px-2.5 py-1 text-[10px] font-semibold text-primary backdrop-blur">
-                          Featured
-                        </span>
+              {/* Featured */}
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+                {featured.map((prod) => (
+                  <motion.div key={prod.title} variants={fadeUp} className="group">
+                    <Link href={prod.link} target="_blank" className="block">
+                      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm border border-border bg-secondary">
+                        <Image src={prod.img} alt={prod.title} fill className="object-contain opacity-90 grayscale transition-all duration-700 ease-out group-hover:scale-[1.02] group-hover:opacity-100 group-hover:grayscale-0" />
+                        <span className="eyebrow absolute left-4 top-4 text-[9px] text-foreground/70 mix-blend-difference">Featured</span>
                       </div>
-                      <div className="flex flex-1 flex-col p-6">
-                        <div className="mb-2 flex items-center justify-between">
-                          <h3 className="text-2xl font-bold text-foreground">{prod.title}</h3>
-                          <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                      <div className="mt-5 flex items-start justify-between gap-4">
+                        <div>
+                          <h3 className="display text-3xl font-medium text-foreground transition-colors group-hover:text-primary">{prod.title}</h3>
+                          <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">{prod.desc}</p>
                         </div>
-                        <p className="mb-4 flex-1 leading-relaxed text-muted-foreground">{prod.desc}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {prod.tags.map((t) => (
-                            <span key={t} className="eyebrow rounded-md border border-border bg-secondary/50 px-2 py-1 text-[10px] font-medium text-muted-foreground">{t}</span>
-                          ))}
-                        </div>
+                        <ArrowUpRight className="mt-1 h-6 w-6 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                      </div>
+                      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+                        {prod.tags.map((t) => (
+                          <span key={t} className="eyebrow text-[9px] text-muted-foreground/70">{t}</span>
+                        ))}
                       </div>
                     </Link>
                   </motion.div>
                 ))}
               </div>
 
-              {/* Secondary — compact grid */}
-              <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Secondary */}
+              <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                 {rest.map((prod) => (
-                  <motion.div key={prod.title} variants={fadeUp} className="group relative overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                    <Link href={prod.link} target="_blank" className="flex h-full flex-col">
-                      <div className="relative aspect-video w-full overflow-hidden bg-secondary">
-                        <Image src={prod.img} alt={prod.title} fill className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]" />
+                  <motion.div key={prod.title} variants={fadeUp} className="group">
+                    <Link href={prod.link} target="_blank" className="block">
+                      <div className="relative aspect-video w-full overflow-hidden rounded-sm border border-border bg-secondary">
+                        <Image src={prod.img} alt={prod.title} fill className="object-contain opacity-90 grayscale transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:opacity-100 group-hover:grayscale-0" />
                       </div>
-                      <div className="flex flex-1 flex-col p-5">
-                        <div className="mb-2 flex items-center justify-between">
-                          <h3 className="text-lg font-bold text-foreground">{prod.title}</h3>
-                          <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
-                        </div>
-                        <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">{prod.desc}</p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {prod.tags.slice(0, 3).map((t) => (
-                            <span key={t} className="eyebrow rounded-md border border-border bg-secondary/50 px-1.5 py-0.5 text-[9px] font-medium text-muted-foreground">{t}</span>
-                          ))}
-                        </div>
+                      <div className="mt-4 flex items-center justify-between">
+                        <h3 className="display text-xl font-medium text-foreground transition-colors group-hover:text-primary">{prod.title}</h3>
+                        <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                      </div>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{prod.desc}</p>
+                      <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
+                        {prod.tags.slice(0, 3).map((t) => (
+                          <span key={t} className="eyebrow text-[9px] text-muted-foreground/70">{t}</span>
+                        ))}
                       </div>
                     </Link>
                   </motion.div>
@@ -458,31 +319,26 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Contact */}
-        <section id="contact" className="relative overflow-hidden bg-background">
-          <div aria-hidden className="pointer-events-none absolute -bottom-40 left-1/2 h-[440px] w-[720px] -translate-x-1/2 rounded-full bg-primary/10 blur-[130px]" />
-          <div className="container relative px-6 py-24 md:py-32">
+        {/* Contact — atmospheric close */}
+        <section id="contact" className="grain relative overflow-hidden border-t border-border bg-atmosphere">
+          <div className="container relative z-[2] px-6 py-28 md:py-36">
             <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 gap-16 md:grid-cols-2">
               <div>
-                <motion.div variants={fadeUp} className="mb-6">
-                  <SectionLabel num="04">Contact</SectionLabel>
+                <motion.div variants={fadeUp} className="mb-8">
+                  <SectionHead num="04" kicker="Contact" title="Let's decode your next build." />
                 </motion.div>
-                <motion.h2 variants={fadeUp} className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                  Let&apos;s build something<br />
-                  <span className="text-gradient">worth shipping.</span>
-                </motion.h2>
-                <motion.p variants={fadeUp} className="mb-10 max-w-md text-lg text-muted-foreground">
-                  Ready to architect your next scale problem or ship an AI product from zero? I&apos;m available for advisory and contract architectures.
+                <motion.p variants={fadeUp} className="mb-10 max-w-md text-base leading-relaxed text-muted-foreground">
+                  Ready to architect your next scale problem or ship an AI product from zero? Available for advisory and contract architectures.
                 </motion.p>
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-                  <Button asChild size="lg" className="shadow-md shadow-primary/20">
+                  <Button asChild size="lg" variant="outline" className="rounded-full border-foreground/30 px-7 py-6 text-sm tracking-wide hover:border-primary hover:bg-primary/5">
                     <Link href="mailto:gbengaoluwadahunsi@gmail.com">
-                      <Mail className="mr-2 h-5 w-5" /> Email Me
+                      <Mail className="mr-2 h-4 w-4" /> Email me
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" size="lg">
+                  <Button asChild size="lg" variant="ghost" className="rounded-full px-7 py-6 text-sm tracking-wide text-muted-foreground hover:text-foreground">
                     <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank">
-                      <Linkedin className="mr-2 h-5 w-5" /> LinkedIn
+                      <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
                     </Link>
                   </Button>
                 </motion.div>
@@ -495,17 +351,17 @@ export default function HomePage() {
         </section>
       </main>
 
-      <footer className="border-t border-border/60 bg-background py-10">
+      <footer className="border-t border-border bg-background py-10">
         <div className="container flex flex-col items-center justify-between gap-4 px-6 md:flex-row">
-          <p className="eyebrow text-[11px] text-muted-foreground">© {new Date().getFullYear()} Gbenga Oluwadahunsi</p>
-          <div className="flex gap-3">
-            <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" aria-label="GitHub" className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground">
+          <p className="eyebrow text-[10px] text-muted-foreground">© {new Date().getFullYear()} Gbenga Oluwadahunsi</p>
+          <div className="flex gap-5">
+            <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" aria-label="GitHub" className="text-muted-foreground transition-colors hover:text-foreground">
               <Github className="h-4 w-4" />
             </Link>
-            <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" aria-label="LinkedIn" className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground">
+            <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" aria-label="LinkedIn" className="text-muted-foreground transition-colors hover:text-foreground">
               <Linkedin className="h-4 w-4" />
             </Link>
-            <Link href="mailto:gbengaoluwadahunsi@gmail.com" aria-label="Email" className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground">
+            <Link href="mailto:gbengaoluwadahunsi@gmail.com" aria-label="Email" className="text-muted-foreground transition-colors hover:text-foreground">
               <Mail className="h-4 w-4" />
             </Link>
           </div>
