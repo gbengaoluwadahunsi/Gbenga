@@ -273,7 +273,7 @@ export default function HomePage() {
                   <motion.div key={prod.title} variants={fadeUp} className="group">
                     <Link href={prod.link} target="_blank" className="block">
                       <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm border border-border bg-secondary">
-                        <Image src={prod.img} alt={prod.title} fill className="object-contain opacity-90 grayscale transition-all duration-700 ease-out group-hover:scale-[1.02] group-hover:opacity-100 group-hover:grayscale-0" />
+                        <Image src={prod.img} alt={prod.title} fill className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
                         <span className="eyebrow absolute left-4 top-4 text-[9px] text-foreground/70 mix-blend-difference">Featured</span>
                       </div>
                       <div className="mt-5 flex items-start justify-between gap-4">
@@ -299,7 +299,7 @@ export default function HomePage() {
                   <motion.div key={prod.title} variants={fadeUp} className="group">
                     <Link href={prod.link} target="_blank" className="block">
                       <div className="relative aspect-video w-full overflow-hidden rounded-sm border border-border bg-secondary">
-                        <Image src={prod.img} alt={prod.title} fill className="object-contain opacity-90 grayscale transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:opacity-100 group-hover:grayscale-0" />
+                        <Image src={prod.img} alt={prod.title} fill className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
                       </div>
                       <div className="mt-4 flex items-center justify-between">
                         <h3 className="display text-xl font-medium text-foreground transition-colors group-hover:text-primary">{prod.title}</h3>
