@@ -19,22 +19,22 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gbengaoluwadahunsi.vercel.app'),
-  title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare · Edge & Private AI)",
+  title: "Gbenga Oluwadahunsi — Fullstack & AI Engineer",
   description:
-    "Fullstack and AI Engineer building healthcare AI systems—from architecture to deployment—with a focus on privacy-preserving, decentralized, and edge AI.",
+    "Fullstack and AI Engineer building high-performance, privacy-first products—from architecture to deployment—across web, mobile, and edge AI.",
   keywords: [
     "Gbenga Oluwadahunsi",
     "AI Engineer",
-    "Healthcare AI",
+    "Fullstack Engineer",
+    "Product Engineer",
     "Edge AI",
     "Private AI",
-    "Decentralized AI",
-    "Novate AI",
-    "Full Stack Developer",
     "Software Engineer",
+    "Full Stack Developer",
     "Next.js",
     "TypeScript",
-    "NovateScribe",
+    "React",
+    "Mobile Development",
   ],
   authors: [{ name: "Gbenga Oluwadahunsi", url: "https://gbengaoluwadahunsi.vercel.app" }],
   creator: "Gbenga Oluwadahunsi",
@@ -62,9 +62,9 @@ export const metadata: Metadata = {
     apple: "/O.png",
   },
   openGraph: {
-    title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare · Edge & Private AI)",
+    title: "Gbenga Oluwadahunsi — Fullstack & AI Engineer",
     description:
-      "Fullstack and AI architecture: intelligent systems for healthcare with a focus on privacy-preserving and edge deployment.",
+      "Fullstack and AI architecture: intelligent, privacy-first products with a focus on performance and edge deployment.",
     url: "https://gbengaoluwadahunsi.vercel.app",
     siteName: "Gbenga Oluwadahunsi Portfolio",
     images: [
@@ -80,9 +80,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gbenga Oluwadahunsi — AI Engineer (Healthcare AI)",
+    title: "Gbenga Oluwadahunsi — Fullstack & AI Engineer",
     description:
-      "Fullstack and AI Engineer. Healthcare, edge, and privacy-first intelligent systems.",
+      "Fullstack and AI Engineer. Privacy-first, high-performance products across web, mobile, and edge.",
     images: ["/og-image.png"],
     creator: "@gbengaoluwadahunsi", // Add your Twitter handle if you have one
   },
@@ -101,7 +101,7 @@ export default function RootLayout({
     "@type": "Person",
     "name": "Gbenga Oluwadahunsi",
     "jobTitle": "AI Engineer",
-    "description": "AI engineer focused on healthcare: privacy-preserving, decentralized, and edge AI.",
+    "description": "Fullstack and AI engineer building privacy-first, high-performance products across web, mobile, and edge.",
     "url": "https://gbengaoluwadahunsi.vercel.app",
     "sameAs": [
       "https://github.com/gbengaoluwadahunsi",
@@ -117,7 +117,7 @@ export default function RootLayout({
     ],
     "knowsAbout": [
       "Artificial Intelligence",
-      "Healthcare Technology",
+      "Product Engineering",
       "Edge Computing",
       "Privacy-Preserving AI",
       "Full Stack Development",

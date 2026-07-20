@@ -40,8 +40,8 @@ const NAV_LINKS = [
 const CAPABILITIES = [
   { icon: Code2, title: "Frontend Architecture", desc: "React, Next.js, TypeScript. Engineered for 60fps performance and zero-layout-shift." },
   { icon: Zap, title: "Backend Systems", desc: "Node.js, FastAPI, Postgres, AWS. Resilient APIs that handle heavy ML payloads with sub-100ms latency." },
-  { icon: TrendingUp, title: "AI Engineering", desc: "Edge inference, RAG, Clinical NLP. Models deployed where privacy and speed mandate." },
-  { icon: CheckCircle2, title: "DevOps & Scale", desc: "Docker, CI/CD, HIPAA-aware infrastructure. Systems that self-heal and scale predictably." },
+  { icon: TrendingUp, title: "AI Engineering", desc: "Edge inference, RAG, applied NLP. Models deployed where privacy and speed mandate." },
+  { icon: CheckCircle2, title: "DevOps & Scale", desc: "Docker, CI/CD, compliance-aware infrastructure. Systems that self-heal and scale predictably." },
 ]
 
 const EXPERIENCE = [
@@ -49,7 +49,7 @@ const EXPERIENCE = [
     role: "CTO, AI & Software Engineer",
     org: "Novate AI",
     time: "2025 — 2026",
-    body: "Founding engineer & CTO for a healthtech company — product, platform, and compliance-aware AI for clinical workflows. Defined technical roadmap, shipped HIPAA-aware architecture, built ML pipelines for medical datasets.",
+    body: "Founding engineer & CTO — owned product, platform, and compliance-aware AI end to end. Defined the technical roadmap, shipped secure architecture, and built production ML pipelines for sensitive data at scale.",
     current: true,
   },
   {
@@ -256,7 +256,7 @@ export default function HomePage() {
 
                 <motion.p variants={fadeUp} className="max-w-xl text-lg font-medium leading-relaxed text-muted-foreground md:text-xl">
                   Fullstack &amp; AI Engineer. I build high-performance,
-                  <span className="text-foreground"> privacy-first healthcare AI</span> systems from the infrastructure up.
+                  <span className="text-foreground"> privacy-first AI products</span> from the infrastructure up — across web, mobile, and edge.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
@@ -331,7 +331,7 @@ export default function HomePage() {
               <motion.div variants={fadeUp} className="mb-14 max-w-2xl space-y-5">
                 <SectionLabel num="01">Capabilities</SectionLabel>
                 <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-                  Engineered for the clinical edge
+                  Engineered for production scale
                 </h2>
                 <p className="text-lg text-muted-foreground">
                   Absolute performance, security, and scalability — from the browser down to the inference layer.
@@ -472,7 +472,7 @@ export default function HomePage() {
                   <span className="text-gradient">worth shipping.</span>
                 </motion.h2>
                 <motion.p variants={fadeUp} className="mb-10 max-w-md text-lg text-muted-foreground">
-                  Ready to architect your next scale problem or healthcare AI solution? I&apos;m available for advisory and contract architectures.
+                  Ready to architect your next scale problem or ship an AI product from zero? I&apos;m available for advisory and contract architectures.
                 </motion.p>
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
                   <Button asChild size="lg" className="shadow-md shadow-primary/20">
