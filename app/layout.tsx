@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
@@ -9,6 +9,11 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-serif",
+  display: "swap",
+})
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 })
 
@@ -142,7 +147,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.className} ${inter.variable} ${playfair.variable}`}
+        className={`${inter.className} ${inter.variable} ${playfair.variable} ${jetbrainsMono.variable}`}
         suppressHydrationWarning
       >
         <ThemeProvider

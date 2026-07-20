@@ -20,6 +20,7 @@ const config = {
     extend: {
       fontFamily: {
         serif: ["var(--font-serif)", "Georgia", "Cambria", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
