@@ -4,53 +4,51 @@
 
 @layer base {
   :root {
-    /* Light — pale dusty sage paper */
-    --background: 150 14% 95%;
-    --foreground: 156 20% 12%;
-    --card: 150 18% 97%;
-    --card-foreground: 156 20% 12%;
-    --popover: 150 18% 97%;
-    --popover-foreground: 156 20% 12%;
-    --primary: 150 24% 32%;
-    --primary-foreground: 150 30% 97%;
-    --secondary: 150 12% 90%;
-    --secondary-foreground: 156 20% 16%;
-    --muted: 150 12% 90%;
-    --muted-foreground: 152 8% 40%;
-    --accent: 150 14% 88%;
-    --accent-foreground: 156 20% 16%;
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 150 30% 97%;
-    --border: 150 12% 84%;
-    --input: 150 12% 84%;
-    --ring: 150 24% 32%;
-    --radius: 0.375rem;
+    --background: 0 0% 100%;
+    --foreground: 160 18% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 160 18% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 18% 8%;
+    --primary: 158 74% 36%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 160 22% 96%;
+    --secondary-foreground: 160 30% 12%;
+    --muted: 160 18% 96%;
+    --muted-foreground: 160 8% 42%;
+    --accent: 160 22% 95%;
+    --accent-foreground: 160 30% 12%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 160 16% 89%;
+    --input: 160 16% 89%;
+    --ring: 158 74% 36%;
+    --radius: 0.75rem;
   }
 
   .dark {
-    /* Dark — moody dusty green charcoal */
-    --background: 156 13% 9%;
-    --foreground: 150 10% 90%;
-    --card: 156 11% 12%;
-    --card-foreground: 150 10% 90%;
-    --popover: 156 12% 10%;
-    --popover-foreground: 150 10% 90%;
-    --primary: 150 20% 64%;
-    --primary-foreground: 156 24% 10%;
-    --secondary: 156 8% 16%;
-    --secondary-foreground: 150 10% 90%;
-    --muted: 156 8% 16%;
-    --muted-foreground: 150 8% 60%;
-    --accent: 156 8% 18%;
-    --accent-foreground: 150 10% 90%;
-    --destructive: 0 55% 45%;
-    --destructive-foreground: 150 10% 90%;
-    --border: 150 7% 22%;
-    --input: 150 7% 22%;
-    --ring: 150 20% 64%;
-    --primary-dark: 150 22% 70%;
-    --accent-dark: 150 18% 50%;
-    --background-dark: 156 13% 9%;
+    --background: 160 14% 4%;
+    --foreground: 160 12% 96%;
+    --card: 160 14% 6.5%;
+    --card-foreground: 160 12% 96%;
+    --popover: 160 16% 6%;
+    --popover-foreground: 160 12% 96%;
+    --primary: 152 78% 52%;
+    --primary-foreground: 160 40% 6%;
+    --secondary: 160 12% 12%;
+    --secondary-foreground: 160 12% 96%;
+    --muted: 160 12% 12%;
+    --muted-foreground: 160 9% 60%;
+    --accent: 160 12% 14%;
+    --accent-foreground: 160 12% 96%;
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 160 12% 14%;
+    --input: 160 12% 14%;
+    --ring: 152 78% 52%;
+    --primary-dark: 152 78% 62%;
+    --accent-dark: 336 87% 71%;
+    --background-dark: 160 14% 4%;
   }
 }
 
@@ -72,59 +70,35 @@ body {
 }
 
 @layer utilities {
-  /* Moody atmospheric fog — a soft light bloom over a dusty green wash */
-  .bg-atmosphere {
-    background:
-      radial-gradient(90% 55% at 50% -8%, hsl(150 20% 78% / 0.5), transparent 62%),
-      radial-gradient(70% 50% at 72% 24%, hsl(150 16% 62% / 0.28), transparent 58%),
-      radial-gradient(60% 60% at 22% 80%, hsl(156 18% 42% / 0.25), transparent 62%),
-      linear-gradient(180deg, hsl(150 16% 90%), hsl(150 14% 82%));
-  }
-  .dark .bg-atmosphere {
-    background:
-      radial-gradient(85% 55% at 50% -6%, hsl(150 22% 42% / 0.55), transparent 60%),
-      radial-gradient(60% 45% at 72% 26%, hsl(150 18% 38% / 0.35), transparent 55%),
-      radial-gradient(65% 60% at 20% 82%, hsl(156 20% 16% / 0.6), transparent 60%),
-      linear-gradient(180deg, hsl(156 14% 13%), hsl(156 15% 7%));
-  }
-
-  /* Film grain overlay for the photographic mood */
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.5;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-    mix-blend-mode: overlay;
-  }
-
+  /* Subtle blueprint grid — signature technical texture */
   .bg-grid {
     background-image:
-      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
-    background-size: 64px 64px;
+      linear-gradient(to right, hsl(var(--border) / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.6) 1px, transparent 1px);
+    background-size: 56px 56px;
   }
 
+  /* Radial fade mask so grids/glows dissolve at the edges */
   .mask-fade {
-    -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 45%, #000 42%, transparent 100%);
-    mask-image: radial-gradient(ellipse 80% 65% at 50% 45%, #000 42%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
   }
 
-  /* Wide letter-spaced technical/editorial label */
+  .text-gradient {
+    background: linear-gradient(
+      120deg,
+      hsl(var(--foreground)) 30%,
+      hsl(var(--primary)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Monospace technical label */
   .eyebrow {
     font-family: var(--font-mono), ui-monospace, monospace;
-    letter-spacing: 0.32em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-  }
-
-  /* Editorial display serif */
-  .display {
-    font-family: var(--font-serif), Georgia, serif;
-  }
-
-  .tracking-editorial {
-    letter-spacing: 0.14em;
   }
 }
