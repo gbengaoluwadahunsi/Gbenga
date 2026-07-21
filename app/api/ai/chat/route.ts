@@ -37,17 +37,20 @@ export async function POST(request: NextRequest) {
         .join("\n")}`
     }
 
-    // Skills queries
+    // Skills / stack queries
     else if (
       lowerMessage.includes("skill") ||
       lowerMessage.includes("technology") ||
-      lowerMessage.includes("expertise")
+      lowerMessage.includes("technologies") ||
+      lowerMessage.includes("tech") ||
+      lowerMessage.includes("stack") ||
+      lowerMessage.includes("expertise") ||
+      lowerMessage.includes("tool") ||
+      lowerMessage.includes("language") ||
+      lowerMessage.includes("framework")
     ) {
-      const expertSkills = skills.filter((s) => s.proficiency === "expert")
-      const categories = DataLoader.getSkillCategories()
-      reply = `I have expertise in ${categories.length} main areas:\n\n${categories
-        .map((cat) => `${cat.toUpperCase()}: ${skills.filter((s) => s.category === cat).map((s) => s.name).join(", ")}`)
-        .join("\n")}`
+      const names = (cat: string) => skills.filter((s) => s.category === cat).map((s) => s.name)
+      reply = `Here's Gbenga's tech stack:\n\n▸ Frontend: ${names("frontend").join(", ")}\n\n▸ Backend: ${names("backend").join(", ")}\n\n▸ AI / ML: ${names("ai").slice(0, 14).join(", ")}\n\n▸ Tools: ${names("tools").join(", ")}`
     }
 
     // Experience queries
