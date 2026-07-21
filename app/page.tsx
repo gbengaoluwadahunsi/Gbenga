@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ArrowRight, ArrowUpRight, Download, Github, Linkedin, Mail, Menu, Code2, Zap, Users, TrendingUp, CheckCircle2 } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Download, Github, Linkedin, Mail, Menu, Code2, Zap, Users, TrendingUp, CheckCircle2, Sparkles } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ContactForm } from "@/components/contact-form"
+import { AIChat } from "@/src/components/ai/ai-chat"
 import logo from "@/public/O.png"
 import { ThemeSwitcher } from "@/components/theme-switcher"
 import {
@@ -232,6 +233,13 @@ export default function HomePage() {
           {/* Blueprint grid + emerald glow backdrop */}
           <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid mask-fade opacity-70" />
           <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-primary/20 blur-[130px]" />
+          {/* Neural pulse nodes */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+            <span className="absolute left-[14%] top-[28%] h-1.5 w-1.5 rounded-full bg-primary/60 animate-ping [animation-duration:3s]" />
+            <span className="absolute right-[20%] top-[52%] h-1 w-1 rounded-full bg-primary/50 animate-ping [animation-duration:4.5s]" />
+            <span className="absolute left-[42%] bottom-[16%] h-1 w-1 rounded-full bg-primary/40 animate-ping [animation-duration:6s]" />
+            <span className="absolute right-[38%] top-[20%] h-1 w-1 rounded-full bg-primary/40 animate-ping [animation-duration:5s]" />
+          </div>
 
           <div className="container relative px-6 pt-20 pb-24 md:pt-28 md:pb-32">
             <motion.div
@@ -272,6 +280,22 @@ export default function HomePage() {
                     </Link>
                   </Button>
                 </motion.div>
+
+                {/* AI prompt bar — opens the portfolio assistant */}
+                <motion.button
+                  variants={fadeUp}
+                  type="button"
+                  onClick={() => window.dispatchEvent(new Event("portfolio:open-chat"))}
+                  className="group flex w-full max-w-md items-center gap-3 rounded-full border border-border bg-card/60 px-4 py-3 text-left shadow-sm backdrop-blur transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/10"
+                >
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
+                    <Sparkles className="h-3.5 w-3.5 text-primary transition-transform group-hover:scale-110" />
+                  </span>
+                  <span className="flex-1 truncate text-sm text-muted-foreground">
+                    Ask my AI about my work, stack, or experience…
+                  </span>
+                  <span className="eyebrow hidden shrink-0 rounded border border-border px-1.5 py-0.5 text-[9px] text-muted-foreground sm:inline">↵</span>
+                </motion.button>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-4">
                   <Link
@@ -316,6 +340,13 @@ export default function HomePage() {
                         <p className="text-3xl font-bold text-foreground">8</p>
                         <p className="eyebrow mt-1 text-[10px] text-muted-foreground">Products Live</p>
                       </div>
+                    </div>
+                    <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+                      <span className="eyebrow text-[9px] text-muted-foreground">inference</span>
+                      <span className="flex items-center gap-1.5 font-mono text-[10px] text-primary">
+                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+                        edge · live
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -511,6 +542,9 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      {/* Floating AI portfolio assistant */}
+      <AIChat />
     </div>
   )
 }
