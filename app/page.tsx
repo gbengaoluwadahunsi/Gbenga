@@ -31,19 +31,6 @@ const stagger = {
   }
 }
 
-const PARTICLES = [
-  { left: "10%", top: "24%", size: 4, dur: "7s", delay: "0s" },
-  { left: "82%", top: "30%", size: 3, dur: "9s", delay: "1.2s" },
-  { left: "24%", top: "68%", size: 5, dur: "8s", delay: "0.6s" },
-  { left: "68%", top: "60%", size: 3, dur: "10s", delay: "2s" },
-  { left: "48%", top: "16%", size: 4, dur: "11s", delay: "0.3s" },
-  { left: "90%", top: "72%", size: 2, dur: "8.5s", delay: "1.8s" },
-  { left: "6%", top: "54%", size: 3, dur: "9.5s", delay: "0.9s" },
-  { left: "58%", top: "82%", size: 4, dur: "7.5s", delay: "1.4s" },
-  { left: "36%", top: "42%", size: 2, dur: "12s", delay: "2.4s" },
-  { left: "76%", top: "14%", size: 3, dur: "8s", delay: "0.5s" },
-]
-
 const NAV_LINKS = [
   { href: "#skills", label: "Capabilities", num: "01" },
   { href: "#experience", label: "Experience", num: "02" },
@@ -241,104 +228,128 @@ export default function HomePage() {
       </header>
 
       <main className="flex-1">
-        {/* Hero — cinematic, animated, centered */}
-        <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden border-b border-border/60">
-          {/* Animated backdrop */}
-          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="aurora aurora-1" />
-              <div className="aurora aurora-2" />
-              <div className="aurora aurora-3" />
-            </div>
-            <div className="absolute inset-0 bg-grid mask-fade opacity-[0.05]" />
-            {PARTICLES.map((p, i) => (
-              <span
-                key={i}
-                className="particle"
-                style={{ left: p.left, top: p.top, height: p.size, width: p.size, ["--dur" as string]: p.dur, ["--delay" as string]: p.delay } as React.CSSProperties}
-              />
-            ))}
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
+        {/* Hero */}
+        <section className="relative overflow-hidden border-b border-border/60">
+          {/* Blueprint grid + emerald glow backdrop */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid mask-fade opacity-70" />
+          <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-primary/20 blur-[130px]" />
+          {/* Neural pulse nodes */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+            <span className="absolute left-[14%] top-[28%] h-1.5 w-1.5 rounded-full bg-primary/60 animate-ping [animation-duration:3s]" />
+            <span className="absolute right-[20%] top-[52%] h-1 w-1 rounded-full bg-primary/50 animate-ping [animation-duration:4.5s]" />
+            <span className="absolute left-[42%] bottom-[16%] h-1 w-1 rounded-full bg-primary/40 animate-ping [animation-duration:6s]" />
+            <span className="absolute right-[38%] top-[20%] h-1 w-1 rounded-full bg-primary/40 animate-ping [animation-duration:5s]" />
           </div>
 
-          <div className="container relative px-6 py-24 text-center">
-            <motion.div initial="initial" animate="animate" variants={stagger} className="mx-auto flex max-w-4xl flex-col items-center">
-              <motion.div variants={fadeUp}>
-                <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 backdrop-blur">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+          <div className="container relative px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+            <motion.div
+              initial="initial" animate="animate" variants={stagger}
+              className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20"
+            >
+              <div className="space-y-8">
+                <motion.div variants={fadeUp}>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3.5 py-1.5">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                    </span>
+                    <span className="eyebrow text-[11px] font-semibold text-primary">Engineering Leader · Available</span>
                   </span>
-                  <span className="eyebrow text-[11px] font-semibold text-primary">Fullstack · AI Engineer — Available</span>
-                </span>
-              </motion.div>
+                </motion.div>
 
-              <motion.h1 variants={fadeUp} className="mt-8 text-5xl font-bold leading-[0.98] tracking-tight text-foreground sm:text-6xl md:text-8xl">
-                Gbenga <br className="hidden sm:block" />
-                <span className="text-shimmer">Oluwadahunsi</span>
-              </motion.h1>
+                <motion.h1 variants={fadeUp} className="text-5xl font-bold leading-[1.02] tracking-tight text-foreground md:text-7xl">
+                  Gbenga <br className="hidden md:block" />
+                  <span className="text-gradient">Oluwadahunsi</span>
+                </motion.h1>
 
-              <motion.p variants={fadeUp} className="mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-                I build high-performance, <span className="text-foreground">privacy-first AI products</span> from the infrastructure up — across web, mobile, and edge.
-              </motion.p>
+                <motion.p variants={fadeUp} className="max-w-xl text-lg font-medium leading-relaxed text-muted-foreground md:text-xl">
+                  Fullstack &amp; AI Engineer. I build high-performance,
+                  <span className="text-foreground"> privacy-first AI products</span> from the infrastructure up — across web, mobile, and edge.
+                </motion.p>
 
-              <motion.div variants={fadeUp} className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
-                <Button asChild size="lg" className="group rounded-full px-8 py-6 text-base font-semibold shadow-lg shadow-primary/30 transition-all hover:shadow-primary/50">
-                  <Link href="#projects">
-                    Explore Products
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                <motion.div variants={fadeUp} className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
+                  <Button asChild size="lg" className="group px-7 py-6 text-base font-semibold shadow-lg shadow-primary/20 transition-all hover:shadow-primary/30">
+                    <Link href="#projects">
+                      Explore Products
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="px-7 py-6 text-base font-semibold">
+                    <Link href="/Gbenga_Oluwadahunsi.pdf" target="_blank">
+                      <Download className="mr-2 h-5 w-5" /> Resume
+                    </Link>
+                  </Button>
+                </motion.div>
+
+                {/* AI prompt bar — opens the portfolio assistant */}
+                <motion.button
+                  variants={fadeUp}
+                  type="button"
+                  onClick={() => window.dispatchEvent(new Event("portfolio:open-chat"))}
+                  className="group flex w-full max-w-md items-center gap-3 rounded-full border border-border bg-card/60 px-4 py-3 text-left shadow-sm backdrop-blur transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/10"
+                >
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
+                    <Sparkles className="h-3.5 w-3.5 text-primary transition-transform group-hover:scale-110" />
+                  </span>
+                  <span className="flex-1 truncate text-sm text-muted-foreground">
+                    Ask my AI about my work, stack, or experience…
+                  </span>
+                  <span className="eyebrow hidden shrink-0 rounded border border-border px-1.5 py-0.5 text-[9px] text-muted-foreground sm:inline">↵</span>
+                </motion.button>
+
+                <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-4">
+                  <Link
+                    href="https://github.com/gbengaoluwadahunsi"
+                    target="_blank"
+                    className="eyebrow group flex items-center gap-2 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <Github className="h-4 w-4" />
+                    github.com/gbengaoluwadahunsi
+                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
                   </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="rounded-full px-8 py-6 text-base font-semibold backdrop-blur">
-                  <Link href="/Gbenga_Oluwadahunsi.pdf" target="_blank">
-                    <Download className="mr-2 h-5 w-5" /> Resume
+                  <Link
+                    href="https://www.linkedin.com/in/gbengaoluwadahunsi/"
+                    target="_blank"
+                    className="eyebrow group flex items-center gap-2 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <Linkedin className="h-4 w-4" />
+                    LinkedIn
+                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
                   </Link>
-                </Button>
-              </motion.div>
+                </motion.div>
+              </div>
 
-              {/* AI prompt bar — opens the portfolio assistant */}
-              <motion.button
-                variants={fadeUp}
-                type="button"
-                onClick={() => window.dispatchEvent(new Event("portfolio:open-chat"))}
-                className="group mt-6 flex w-full max-w-lg items-center gap-3 rounded-full border border-border bg-card/50 px-4 py-3 text-left shadow-sm backdrop-blur transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/10"
-              >
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
-                  <Sparkles className="h-3.5 w-3.5 text-primary transition-transform group-hover:scale-110" />
-                </span>
-                <span className="flex-1 truncate text-sm text-muted-foreground">
-                  Ask my AI about my work, stack, or experience…
-                </span>
-                <span className="eyebrow hidden shrink-0 rounded border border-border px-1.5 py-0.5 text-[9px] text-muted-foreground sm:inline">↵</span>
-              </motion.button>
+              {/* Portrait + stat rail */}
+              <motion.div variants={fadeUp} className="relative mx-auto w-full max-w-md lg:ml-auto">
+                <div className="relative aspect-[4/5] w-full">
+                  {/* accent frame */}
+                  <div aria-hidden className="absolute -inset-3 rounded-[1.75rem] border border-primary/20" />
+                  <div className="absolute inset-0 overflow-hidden rounded-2xl bg-secondary shadow-2xl ring-1 ring-border">
+                    <Image src="/hero.png" alt="Gbenga Oluwadahunsi" fill priority className="object-cover" />
+                    <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                  </div>
 
-              {/* Stat pills */}
-              <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center justify-center gap-3">
-                <div className="flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 backdrop-blur">
-                  <span className="text-lg font-bold text-foreground">4<span className="text-primary">+</span></span>
-                  <span className="eyebrow text-[10px] text-muted-foreground">Yrs shipping AI</span>
+                  {/* stat card */}
+                  <div className="absolute -bottom-6 -left-6 z-10 w-60 rounded-xl border bg-card/90 p-5 shadow-xl backdrop-blur-md">
+                    <div className="grid grid-cols-2 divide-x divide-border">
+                      <div className="pr-4">
+                        <p className="text-3xl font-bold text-foreground">4<span className="text-primary">+</span></p>
+                        <p className="eyebrow mt-1 text-[10px] text-muted-foreground">Yrs Shipping AI</p>
+                      </div>
+                      <div className="pl-4">
+                        <p className="text-3xl font-bold text-foreground">8</p>
+                        <p className="eyebrow mt-1 text-[10px] text-muted-foreground">Products Live</p>
+                      </div>
+                    </div>
+                    <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+                      <span className="eyebrow text-[9px] text-muted-foreground">inference</span>
+                      <span className="flex items-center gap-1.5 font-mono text-[10px] text-primary">
+                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+                        edge · live
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 backdrop-blur">
-                  <span className="text-lg font-bold text-foreground">8</span>
-                  <span className="eyebrow text-[10px] text-muted-foreground">Products live</span>
-                </div>
-                <div className="flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 backdrop-blur">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-primary">edge · live</span>
-                </div>
-              </motion.div>
-
-              {/* Socials */}
-              <motion.div variants={fadeUp} className="mt-8 flex items-center gap-6">
-                <Link href="https://github.com/gbengaoluwadahunsi" target="_blank" className="eyebrow group flex items-center gap-2 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground">
-                  <Github className="h-4 w-4" /> GitHub
-                  <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
-                </Link>
-                <span className="h-3 w-px bg-border" />
-                <Link href="https://www.linkedin.com/in/gbengaoluwadahunsi/" target="_blank" className="eyebrow group flex items-center gap-2 text-[11px] font-medium text-muted-foreground transition-colors hover:text-foreground">
-                  <Linkedin className="h-4 w-4" /> LinkedIn
-                  <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
-                </Link>
               </motion.div>
             </motion.div>
           </div>
