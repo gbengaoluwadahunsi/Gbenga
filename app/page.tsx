@@ -40,7 +40,7 @@ const NAV_LINKS = [
 
 const CAPABILITIES = [
   { icon: Code2, title: "Frontend Architecture", desc: "React, Next.js, TypeScript. Engineered for 60fps performance and zero-layout-shift." },
-  { icon: Zap, title: "Backend Systems", desc: "Node.js, FastAPI, Golang, Gin, Postgres, AWS. Resilient APIs that handle heavy ML payloads with sub-100ms latency." },
+  { icon: Zap, title: "Backend Systems", desc: "Node.js, FastAPI, Golang, Postgres, AWS. Resilient APIs that handle heavy ML payloads with sub-100ms latency." },
   { icon: TrendingUp, title: "AI Engineering", desc: "Edge inference, RAG, applied NLP. Models deployed where privacy and speed mandate." },
   { icon: CheckCircle2, title: "DevOps & Scale", desc: "Docker, CI/CD, compliance-aware infrastructure. Systems that self-heal and scale predictably." },
 ]
