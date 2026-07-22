@@ -99,9 +99,11 @@ export async function POST(request: NextRequest) {
       reply = `Gbenga is a full-stack engineer and AI architect with ${stats.yearsOfExperience}+ years of experience. They've:\n• Built ${stats.totalProjects} projects (${stats.featuredProjects} featured)\n• Mastered ${stats.totalSkills} technologies across ${stats.categories} categories\n• Worked at leading tech companies\n• Specialized in AI engineering and full-stack development`
     }
 
-    // Default response
+    // Default response — surface real highlights instead of a bare menu
     else {
-      reply = `That's a great question! I can help with information about Gbenga's:\n• Projects - Ask about specific work or portfolio items\n• Skills - Ask about technologies and expertise\n• Experience - Ask about professional background\n• AI/ML - Ask about AI engineering specializations\n\nWhat would you like to know?`
+      const featuredNames = projects.filter((p) => p.featured).slice(0, 2).map((p) => p.title)
+      const recent = featuredNames.length ? featuredNames.join(" & ") : projects.slice(0, 2).map((p) => p.title).join(" & ")
+      reply = `Happy to help — here's a quick snapshot of Gbenga:\n\n• Fullstack & AI engineer shipping ${stats.totalProjects} products across web, mobile & edge\n• Recent work: ${recent}\n• AI focus: RAG, agentic systems, and privacy-first on-device ML\n\nAsk me to go deeper on his projects, tech stack, experience, or AI work.`
     }
 
     return NextResponse.json({ reply })
