@@ -14,8 +14,8 @@ interface ProjectCardProps {
   description: string
   technologies: string[]
   imageUrl: string
-  githubUrl: string
-  liveUrl: string
+  githubUrl?: string
+  liveUrl?: string
 }
 
 export function ProjectCard({ title, description, technologies, imageUrl, githubUrl, liveUrl }: ProjectCardProps) {
@@ -65,29 +65,33 @@ export function ProjectCard({ title, description, technologies, imageUrl, github
             ))}
           </motion.div>
         </CardContent>
-        <CardFooter className="p-4 pt-0 flex gap-3 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700"> {/* Adjusted padding and added background */}
-          <motion.div className="flex-1" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-            <Link 
-              href={githubUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-full h-9 rounded-md px-3 text-sm font-medium border border-slate-300 dark:border-slate-600 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
-              <Github className="h-3.5 w-3.5 mr-1.5" /> {/* Adjusted icon size and added margin */}
-              Code
-            </Link>
-          </motion.div>
-          <motion.div className="flex-1" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-            <Link 
-              href={liveUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-full h-9 rounded-md px-3 text-sm font-medium bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
-              <ExternalLink className="h-3.5 w-3.5 mr-1.5" /> {/* Adjusted icon size and added margin */}
-              Demo
-            </Link>
-          </motion.div>
+        <CardFooter className="p-4 pt-0 flex gap-3 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700">
+          {githubUrl && (
+            <motion.div className="flex-1" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link 
+                href={githubUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full h-9 rounded-md px-3 text-sm font-medium border border-slate-300 dark:border-slate-600 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              >
+                <Github className="h-3.5 w-3.5 mr-1.5" />
+                Code
+              </Link>
+            </motion.div>
+          )}
+          {liveUrl && (
+            <motion.div className="flex-1" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link 
+                href={liveUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full h-9 rounded-md px-3 text-sm font-medium bg-primary hover:bg-primary/90 dark:bg-primary-dark dark:hover:bg-primary-dark/90 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              >
+                <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
+                Demo
+              </Link>
+            </motion.div>
+          )}
         </CardFooter>
       </Card>
     </motion.div>

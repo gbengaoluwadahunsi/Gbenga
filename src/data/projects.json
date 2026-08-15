@@ -1,5 +1,32 @@
 [
   {
+    "id": "codecampi",
+    "title": "CodeCampi",
+    "description": "Multi-language programming education platform. Compare, learn, practice, and review code across six languages — see the diff, not just the syntax.",
+    "longDescription": "CodeCampi helps polyglot engineers stop relearning the basics and start transferring what they know. Pick a concept you already understand, see how Python, JavaScript, TypeScript, Go, Rust, and Java each spell it, and understand why they differ. Compare mode shows the axis each difference sits on (type system, absence handling, arithmetic, stdlib design), progress tracks mastery per concept per language, and code review gives layered, senior-engineer feedback instead of answer dumps.",
+    "technologies": ["Next.js", "TypeScript", "React", "TailwindCSS", "Vercel"],
+    "imageUrl": "/codecampi.png",
+    "liveUrl": "https://code-campi-4ygh-dusky.vercel.app/",
+    "featured": true,
+    "category": "EdTech",
+    "year": 2026,
+    "metrics": {
+      "performance": "Six languages, 35 concept comparisons",
+      "users": "Polyglot developers",
+      "impact": "Concept-first language transfer"
+    },
+    "challenges": [
+      "Building a concept-first learning model that spans six languages",
+      "Rendering side-by-side code comparisons across languages with different idioms",
+      "Designing per-concept, per-language mastery tracking"
+    ],
+    "solutions": [
+      "Structured lessons around concepts, not syntax",
+      "Side-by-side diff views that surface why implementations differ",
+      "Layered code review with progressive hints"
+    ]
+  },
+  {
     "id": "learnaos",
     "title": "LearnaOS",
     "description": "Turn any GitHub repo into a book-style course with one CLI command. Curated library with subscriptions, Clerk auth, and Stripe billing.",
