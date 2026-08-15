@@ -4,7 +4,7 @@
     "title": "CodeCampi",
     "description": "Multi-language programming education platform. Compare, learn, practice, and review code across six languages — see the diff, not just the syntax.",
     "longDescription": "CodeCampi helps polyglot engineers stop relearning the basics and start transferring what they know. Pick a concept you already understand, see how Python, JavaScript, TypeScript, Go, Rust, and Java each spell it, and understand why they differ. Compare mode shows the axis each difference sits on (type system, absence handling, arithmetic, stdlib design), progress tracks mastery per concept per language, and code review gives layered, senior-engineer feedback instead of answer dumps.",
-    "technologies": ["Next.js", "TypeScript", "React", "TailwindCSS", "Vercel"],
+    "technologies": ["Next.js", "TypeScript", "Golang"],
     "imageUrl": "/codecampi.png",
     "liveUrl": "https://code-campi-4ygh-dusky.vercel.app/",
     "featured": true,

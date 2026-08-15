@@ -82,7 +82,7 @@ const PROJECTS = [
     desc: "Multi-language programming education that helps engineers transfer what they already know. Compare, learn, practice, and get layered AI code review across Python, JavaScript, TypeScript, Go, and Rust.",
     img: "/codecampi.png",
     link: "https://code-campi-4ygh-dusky.vercel.app/",
-    tags: ["Next.js", "TypeScript", "AI Review", "Polyglot"],
+    tags: ["Next.js", "TypeScript", "Golang"],
     featured: true,
   },
   {
