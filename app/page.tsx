@@ -78,19 +78,19 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
+    title: "CodeCampi",
+    desc: "Multi-language programming education that helps engineers transfer what they already know. Compare, learn, practice, and get layered AI code review across Python, JavaScript, TypeScript, Go, and Rust.",
+    img: "/codecampi.png",
+    link: "https://code-campi-4ygh-dusky.vercel.app/",
+    tags: ["Next.js", "TypeScript", "AI Review", "Polyglot"],
+    featured: true,
+  },
+  {
     title: "LearnaOS",
     desc: "Turn any GitHub repo into a book-style course with one CLI command. Hosted library with curated courses, Clerk auth, Stripe subscriptions, and Pro AI learning tools.",
     img: "/learnaos.jpeg",
     link: "https://www.learnaos.com",
     tags: ["Next.js", "Stripe", "Clerk", "AI"],
-    featured: true,
-  },
-  {
-    title: "Prezzence",
-    desc: "AI-powered Android interview prep app. Practice with a real-time AI avatar, on-device whisper.cpp transcription, and MediaPipe camera presence coaching.",
-    img: "/prezzence.jpeg",
-    link: "https://www.prezzence.app",
-    tags: ["Kotlin", "whisper.cpp", "MediaPipe", "FastAPI"],
     featured: true,
   },
   {
