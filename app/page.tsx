@@ -86,20 +86,12 @@ const PROJECTS = [
     featured: true,
   },
   {
-    title: "LearnaOS",
-    desc: "Turn any GitHub repo into a book-style course with one CLI command. Hosted library with curated courses, Clerk auth, Stripe subscriptions, and Pro AI learning tools.",
-    img: "/learnaos.jpeg",
-    link: "https://www.learnaos.com",
-    tags: ["Next.js", "Stripe", "Clerk", "AI"],
-    featured: true,
-  },
-  {
     title: "NovateScribe",
     desc: "AI-Powered Notes for Medical Practitioners. Production healthcare AI with 99.9% uptime. Built with Next.js, Node.js, and HIPAA-aware ML pipelines.",
     img: "/novateScribe.jpeg",
     link: "https://www.novatescribe.com",
     tags: ["Healthcare AI", "RAG", "HIPAA", "AWS"],
-    featured: false,
+    featured: true,
   },
   {
     title: "ClinicDDI",
@@ -107,14 +99,6 @@ const PROJECTS = [
     img: "/clinicDDI.jpeg",
     link: "https://clinic-ddi.vercel.app/",
     tags: ["Clinical AI", "Next.js", "Python"],
-    featured: false,
-  },
-  {
-    title: "Carouslk",
-    desc: "A powerful carousel creation tool that enables users to build beautiful, responsive carousels for images and videos. Features drag-and-drop reordering.",
-    img: "/carouslk.jpeg",
-    link: "https://www.carouslk.com/",
-    tags: ["Canvas API", "Dnd-kit", "Framer Motion"],
     featured: false,
   },
   {
@@ -462,7 +446,7 @@ export default function HomePage() {
               </div>
 
               {/* Secondary — compact grid */}
-              <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {rest.map((prod) => (
                   <motion.div key={prod.title} variants={fadeUp} className="group relative overflow-hidden rounded-2xl border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                     <Link href={prod.link} target="_blank" className="flex h-full flex-col">
