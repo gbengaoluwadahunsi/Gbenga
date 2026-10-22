@@ -1,175 +1,104 @@
 "use client"
 
-import type React from "react"
-import { useState, useRef } from "react"
-import { Send } from "lucide-react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/components/ui/use-toast"
-import emailjs from '@emailjs/browser'
+import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import emailjs from "@emailjs/browser"
+import { Send } from "lucide-react"
+import { PROFILE } from "@/lib/portfolio"
 
-const fadeInUpVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-}
+const schema = z.object({
+  name: z.string().trim().min(1, "Please tell me your name."),
+  email: z.string().trim().email("That email doesn't look right."),
+  subject: z.string().trim().optional(),
+  message: z.string().trim().min(10, "A sentence or two helps — at least 10 characters."),
+})
 
-const staggerContainerVariants = {
-  initial: {},
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
+type FormData = z.infer<typeof schema>
+type Status = { kind: "idle" | "sent" | "error"; text: string }
 
-type FormData = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
+const IDLE: Status = { kind: "idle", text: "Replies within two working days." }
 
 export function ContactForm() {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { handleSubmit, reset } = useForm<FormData>()
   const formRef = useRef<HTMLFormElement>(null)
+  const [status, setStatus] = useState<Status>(IDLE)
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({ resolver: zodResolver(schema), mode: "onTouched" })
 
-  const sendEmail = async () => {
-    if (!formRef.current) return;
-    setIsSubmitting(true);
+  const mailtoFallback = () => {
+    const v = getValues()
+    const body = encodeURIComponent(`${v.message ?? ""}\n\n— ${v.name ?? ""} (${v.email ?? ""})`)
+    return `mailto:${PROFILE.email}?subject=${encodeURIComponent(v.subject || "Hello")}&body=${body}`
+  }
+
+  const onSubmit = async () => {
+    if (!formRef.current) return
     try {
       const result = await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         formRef.current,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      );
-      if (result.status === 200) {
-        console.log("EmailJS Success - showing toast");
-        toast({
-          title: "Message sent! ✉️",
-          description: "Thank you for reaching us, Message sent successfully!",
-          variant: "default",
-          className: "border-green-500 bg-green-50 dark:bg-green-900",
-        });
-        reset();
-      } else {
-        throw new Error("EmailJS did not return status 200");
-      }
-    } catch (error: any) {
-      console.error("EmailJS Error:", error);
-      console.log("EmailJS Error - showing error toast");
-      toast({
-        title: "Error",
-        description: error?.text || error?.message || "Error sending message. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+      )
+      if (result.status !== 200) throw new Error("Send failed")
+      reset()
+      setStatus({ kind: "sent", text: "Message sent — thank you. I'll be in touch soon." })
+    } catch {
+      setStatus({ kind: "error", text: "Couldn't send right now." })
     }
-  };
+  }
+
+  const field = (name: keyof FormData, label: string, opts: { full?: boolean; area?: boolean; type?: string; placeholder?: string; autoComplete?: string } = {}) => {
+    const err = errors[name]?.message
+    const Tag = opts.area ? "textarea" : "input"
+    return (
+      <div className={`field${opts.full ? " full" : ""}${err ? " invalid" : ""}`}>
+        <label htmlFor={`f-${name}`}>{label}</label>
+        <Tag
+          id={`f-${name}`}
+          type={opts.area ? undefined : opts.type ?? "text"}
+          placeholder={opts.placeholder}
+          autoComplete={opts.autoComplete}
+          aria-invalid={!!err}
+          aria-describedby={`h-${name}`}
+          {...register(name)}
+        />
+        <span className="help" id={`h-${name}`}>
+          {err}
+        </span>
+      </div>
+    )
+  }
 
   return (
-    <motion.form
-      ref={formRef}
-      onSubmit={handleSubmit(sendEmail)}
-      className="bg-card border rounded-2xl shadow-sm p-6 md:p-8 space-y-6"
-      variants={staggerContainerVariants}
-      initial="initial"
-      animate="animate"
-    >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-        {/* Name Field */}
-        <motion.div className="relative" variants={fadeInUpVariants}>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            className="peer block w-full appearance-none border-0 border-b-2 border-slate-300 dark:border-slate-600 bg-transparent py-3 px-0.5 text-sm text-slate-800 dark:text-slate-200 placeholder-transparent focus:border-primary dark:focus:border-primary-dark focus:outline-none focus:ring-0 transition-colors duration-200"
-            placeholder=" "
-          />
-          <label
-            htmlFor="name"
-            className="absolute top-3 origin-[0] -translate-y-6 scale-75 transform text-sm text-slate-800 dark:text-slate-300 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-primary dark:peer-focus:text-primary-dark"
-          >
-            Name
-          </label>
-        </motion.div>
-
-        {/* Email Field */}
-        <motion.div className="relative" variants={fadeInUpVariants}>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            className="peer block w-full appearance-none border-0 border-b-2 border-slate-300 dark:border-slate-600 bg-transparent py-3 px-0.5 text-sm text-slate-800 dark:text-slate-200 placeholder-transparent focus:border-primary dark:focus:border-primary-dark focus:outline-none focus:ring-0 transition-colors duration-200"
-            placeholder=" "
-          />
-          <label
-            htmlFor="email"
-            className="absolute top-3 origin-[0] -translate-y-6 scale-75 transform text-sm text-slate-800 dark:text-slate-300 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-primary dark:peer-focus:text-primary-dark"
-          >
-            Email
-          </label>
-        </motion.div>
-      </div>
-
-      {/* Subject Field */}
-      <motion.div className="relative" variants={fadeInUpVariants}>
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          required
-          className="peer block w-full appearance-none border-0 border-b-2 border-slate-300 dark:border-slate-600 bg-transparent py-3 px-0.5 text-sm text-slate-800 dark:text-slate-200 placeholder-transparent focus:border-primary dark:focus:border-primary-dark focus:outline-none focus:ring-0 transition-colors duration-200"
-          placeholder=" "
-        />
-        <label
-          htmlFor="subject"
-          className="absolute top-3 origin-[0] -translate-y-6 scale-75 transform text-sm text-slate-800 dark:text-slate-300 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-primary dark:peer-focus:text-primary-dark"
-        >
-          Subject
-        </label>
-      </motion.div>
-
-      {/* Message Field */}
-      <motion.div className="relative" variants={fadeInUpVariants}>
-        <textarea
-          id="message"
-          name="message"
-          rows={3}
-          required
-          className="peer block w-full appearance-none border-0 border-b-2 border-slate-300 dark:border-slate-600 bg-transparent py-3 px-0.5 text-sm text-slate-800 dark:text-slate-200 placeholder-transparent focus:border-primary dark:focus:border-primary-dark focus:outline-none focus:ring-0 resize-none transition-colors duration-200"
-          placeholder=" "
-        />
-        <label
-          htmlFor="message"
-          className="absolute top-3 origin-[0] -translate-y-6 scale-75 transform text-sm text-slate-800 dark:text-slate-300 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-primary dark:peer-focus:text-primary-dark"
-        >
-          Message
-        </label>
-      </motion.div>
-
-      <motion.div variants={fadeInUpVariants}>
-        <Button
-          type="submit"
-          className="w-full text-base font-semibold py-6 shadow-sm hover:shadow-primary/25 transition-all"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? (
-            <>Processing...</>
-          ) : (
+    <form ref={formRef} className="form" noValidate onSubmit={handleSubmit(onSubmit)}>
+      {field("name", "Name", { autoComplete: "name" })}
+      {field("email", "Email", { type: "email", autoComplete: "email" })}
+      {field("subject", "Subject", { full: true, placeholder: "Contract role, advisory, a product idea" })}
+      {field("message", "Message", { full: true, area: true })}
+      <div className="form-foot">
+        <p className={`form-status form-status--${status.kind}`} role="status" aria-live="polite">
+          {status.text}
+          {status.kind === "error" && (
             <>
-              Send Message <Send className="ml-2 h-4 w-4" />
+              {" "}
+              <a href={mailtoFallback()}>Email me directly instead.</a>
             </>
           )}
-        </Button>
-      </motion.div>
-    </motion.form>
+        </p>
+        <button className="btn btn--ghost" type="submit" aria-busy={isSubmitting}>
+          {isSubmitting ? "Sending…" : "Send"}
+          <span className="btn-icon">
+            <Send size={16} strokeWidth={1.5} aria-hidden="true" />
+          </span>
+        </button>
+      </div>
+    </form>
   )
 }

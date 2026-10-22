@@ -1,10 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Send, Loader2, X, Sparkles } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { Sparkles, X } from "lucide-react"
 
 interface Message {
   id: string
@@ -12,179 +9,174 @@ interface Message {
   sender: "user" | "ai"
 }
 
-const SUGGESTIONS = [
-  "What has he built?",
-  "AI / ML expertise?",
-  "Work experience?",
-  "Tech stack?",
-]
+const SUGGESTIONS = ["What has he shipped?", "What's his stack?", "AI / ML expertise?", "Is he available?"]
 
 export function AIChat() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hi — I'm Gbenga's portfolio assistant, running on his project data. Ask me about his products, stack, or experience.",
+      text: "Hi — I'm Gbenga's portfolio assistant. Ask me about his products, stack, experience, or how to get in touch.",
       sender: "ai",
     },
   ])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const threadRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const launcherRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: "smooth" })
   }, [messages, isLoading])
 
-  // Allow other parts of the page (e.g. the hero prompt bar) to open the assistant
-  useEffect(() => {
-    const open = () => setIsOpen(true)
-    window.addEventListener("portfolio:open-chat", open)
-    return () => window.removeEventListener("portfolio:open-chat", open)
+  const send = useCallback(
+    async (text: string) => {
+      const q = text.trim()
+      if (!q || isLoading) return
+
+      setMessages((prev) => [...prev, { id: `${Date.now()}u`, text: q, sender: "user" }])
+      setInput("")
+      setIsLoading(true)
+
+      try {
+        const response = await fetch("/api/ai/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: q }),
+        })
+        const data = await response.json()
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `${Date.now()}a`,
+            text: data.reply || "Sorry, I couldn't process that. Try asking about projects or experience.",
+            sender: "ai",
+          },
+        ])
+      } catch {
+        setMessages((prev) => [
+          ...prev,
+          { id: `${Date.now()}e`, text: "Sorry, I hit an error. Please try again.", sender: "ai" },
+        ])
+      } finally {
+        setIsLoading(false)
+      }
+    },
+    [isLoading],
+  )
+
+  const close = useCallback(() => {
+    setIsOpen(false)
+    launcherRef.current?.focus()
   }, [])
 
-  const send = async (text: string) => {
-    const q = text.trim()
-    if (!q || isLoading) return
-
-    setMessages((prev) => [...prev, { id: Date.now().toString(), text: q, sender: "user" }])
-    setInput("")
-    setIsLoading(true)
-
-    try {
-      const response = await fetch("/api/ai/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: q }),
-      })
-      const data = await response.json()
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          text: data.reply || "Sorry, I couldn't process that. Try asking about projects or experience.",
-          sender: "ai",
-        },
-      ])
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        { id: (Date.now() + 2).toString(), text: "Sorry, I hit an error. Please try again.", sender: "ai" },
-      ])
-    } finally {
-      setIsLoading(false)
+  // Other parts of the page (the hero prompt bar) can open the assistant, optionally with a question
+  useEffect(() => {
+    const open = (e: Event) => {
+      setIsOpen(true)
+      const question = (e as CustomEvent<{ question?: string }>).detail?.question
+      if (question) send(question)
     }
-  }
+    window.addEventListener("portfolio:open-chat", open)
+    return () => window.removeEventListener("portfolio:open-chat", open)
+  }, [send])
+
+  useEffect(() => {
+    if (!isOpen) return
+    inputRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && close()
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [isOpen, close])
 
   return (
     <>
-      {/* Launcher */}
-      <motion.button
-        onClick={() => setIsOpen((o) => !o)}
-        aria-label="Open AI assistant"
-        className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 ring-1 ring-primary/40"
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.94 }}
+      <button
+        ref={launcherRef}
+        className="fab"
+        type="button"
+        aria-controls="assistant"
+        aria-expanded={isOpen}
+        onClick={() => (isOpen ? close() : setIsOpen(true))}
       >
-        {!isOpen && (
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/40" />
-        )}
-        <span className="relative">
-          {isOpen ? <X className="h-6 w-6" /> : <Sparkles className="h-6 w-6" />}
+        <span className="fab-icon">
+          <Sparkles size={18} strokeWidth={1.5} aria-hidden="true" />
         </span>
-      </motion.button>
+        <span className="fab-text">Ask my AI</span>
+      </button>
 
-      {/* Window */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.96 }}
-            transition={{ type: "spring", stiffness: 320, damping: 26 }}
-            className="fixed bottom-24 right-6 z-40 flex h-[28rem] w-[calc(100vw-3rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
-          >
-            {/* Header */}
-            <div className="flex items-center gap-3 border-b border-border bg-secondary/40 px-4 py-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 ring-1 ring-primary/20">
-                <Sparkles className="h-4 w-4 text-primary" />
-              </span>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-foreground">Portfolio Assistant</p>
-                <p className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  <span className="font-mono uppercase tracking-wider">online</span>
-                </p>
+      <aside
+        className={`assistant${isOpen ? " open" : ""}`}
+        id="assistant"
+        role="dialog"
+        aria-modal="false"
+        aria-labelledby="assistant-title"
+        aria-hidden={!isOpen}
+        inert={!isOpen}
+      >
+        <div className="assistant-core">
+          <header>
+            <div>
+              <h2 id="assistant-title">Ask about Gbenga</h2>
+              <p>Answers drawn from this portfolio</p>
+            </div>
+            <button className="icon-btn" type="button" aria-label="Close assistant" onClick={close}>
+              <X size={18} strokeWidth={1.5} aria-hidden="true" />
+            </button>
+          </header>
+
+          <div className="thread" ref={threadRef} role="log" aria-live="polite">
+            {messages.map((m) => (
+              <div key={m.id} className={`msg ${m.sender === "user" ? "me" : "bot"}`}>
+                {m.text}
               </div>
-            </div>
+            ))}
+            {isLoading && (
+              <div className="msg bot" aria-label="Assistant is typing">
+                <span className="typing" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              </div>
+            )}
+          </div>
 
-            {/* Messages */}
-            <div className="flex-1 space-y-3 overflow-y-auto p-4">
-              {messages.map((m) => (
-                <motion.div
-                  key={m.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${m.sender === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={`max-w-[85%] whitespace-pre-wrap break-words rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
-                      m.sender === "user"
-                        ? "rounded-br-sm bg-primary text-primary-foreground"
-                        : "rounded-bl-sm bg-secondary text-foreground"
-                    }`}
-                  >
-                    {m.text}
-                  </div>
-                </motion.div>
+          {messages.length === 1 && !isLoading && (
+            <div className="chips">
+              {SUGGESTIONS.map((s) => (
+                <button key={s} className="chip" type="button" onClick={() => send(s)}>
+                  {s}
+                </button>
               ))}
-
-              {isLoading && (
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                  <span className="font-mono text-xs uppercase tracking-wider">inferring…</span>
-                </div>
-              )}
-
-              {/* Suggestion chips (only before the first user turn) */}
-              {messages.length === 1 && !isLoading && (
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {SUGGESTIONS.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => send(s)}
-                      className="rounded-full border border-border bg-background px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              )}
-              <div ref={messagesEndRef} />
             </div>
+          )}
 
-            {/* Input */}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                send(input)
-              }}
-              className="flex gap-2 border-t border-border p-3"
-            >
-              <Input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about projects, stack, experience…"
-                disabled={isLoading}
-                className="flex-1 border-border bg-background"
-              />
-              <Button type="submit" disabled={isLoading || !input.trim()} size="icon" aria-label="Send">
-                <Send className="h-4 w-4" />
-              </Button>
-            </form>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              send(input)
+            }}
+          >
+            <label htmlFor="assistant-input" className="sr-only">
+              Your question
+            </label>
+            <input
+              ref={inputRef}
+              id="assistant-input"
+              autoComplete="off"
+              placeholder="Ask a question…"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={isLoading}
+            />
+            <button className="kbd" type="submit" aria-label="Send" disabled={isLoading || !input.trim()}>
+              ↵
+            </button>
+          </form>
+        </div>
+      </aside>
     </>
   )
 }
