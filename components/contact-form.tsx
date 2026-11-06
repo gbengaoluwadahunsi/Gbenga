@@ -1,10 +1,9 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import emailjs from "@emailjs/browser"
 import { Send } from "lucide-react"
 import { PROFILE } from "@/lib/portfolio"
 
@@ -21,7 +20,6 @@ type Status = { kind: "idle" | "sent" | "error"; text: string }
 const IDLE: Status = { kind: "idle", text: "Replies within two working days." }
 
 export function ContactForm() {
-  const formRef = useRef<HTMLFormElement>(null)
   const [status, setStatus] = useState<Status>(IDLE)
   const {
     register,
@@ -37,16 +35,22 @@ export function ContactForm() {
     return `mailto:${PROFILE.email}?subject=${encodeURIComponent(v.subject || "Hello")}&body=${body}`
   }
 
-  const onSubmit = async () => {
-    if (!formRef.current) return
+  const onSubmit = async (values: FormData) => {
     try {
-      const result = await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        formRef.current,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
-      )
-      if (result.status !== 200) throw new Error("Send failed")
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          name: values.name,
+          email: values.email,
+          subject: values.subject || "New message from your portfolio",
+          message: values.message,
+          from_name: "Portfolio contact form",
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.success) throw new Error("Send failed")
       reset()
       setStatus({ kind: "sent", text: "Message sent — thank you. I'll be in touch soon." })
     } catch {
@@ -77,7 +81,7 @@ export function ContactForm() {
   }
 
   return (
-    <form ref={formRef} className="form" noValidate onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" noValidate onSubmit={handleSubmit(onSubmit)}>
       {field("name", "Name", { autoComplete: "name" })}
       {field("email", "Email", { type: "email", autoComplete: "email" })}
       {field("subject", "Subject", { full: true, placeholder: "Contract role, advisory, a product idea" })}
