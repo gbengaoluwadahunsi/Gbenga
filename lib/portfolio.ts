@@ -116,7 +116,7 @@ export const PRODUCTS: Product[] = [
     image: "/owlle.png",
     href: "https://owlle-psi.vercel.app/",
     tags: ["On-device AI", "Legal", "Privacy-first"],
-    featured: false,
+    featured: true,
   },
   {
     title: "CodeCampi",
