@@ -113,7 +113,7 @@ export const PRODUCTS: Product[] = [
     kicker: "Legal AI",
     summary:
       "A private AI tool for lawyers that runs entirely on the user's device. Reviews contracts against a playbook, answers questions across a matter, and transcribes client calls, so documents and recordings never leave the laptop.",
-    image: "/placeholder.jpg",
+    image: "/owlle.png",
     href: "https://owlle-psi.vercel.app/",
     tags: ["On-device AI", "Legal", "Privacy-first"],
     featured: false,
